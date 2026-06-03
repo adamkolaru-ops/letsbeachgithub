@@ -350,7 +350,7 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
     </div>
     <!-- 3: video (fallback: zoom photo) -->
     <div class="hero-slide" data-fallback="post_004_C9sgjSHObgW.jpg">
-      <video muted loop playsinline>
+      <video autoplay muted loop playsinline>
         <source src="videos/post_004_C9sgjSHObgW_child7.mp4" type="video/mp4">
       </video>
     </div>
@@ -621,7 +621,7 @@ function goSlide(n){
   cur=n;
   slides[cur].classList.add('active');dots[cur].classList.add('active');
   const newVid=slides[cur].querySelector('video');
-  if(newVid){newVid.currentTime=0;newVid.play();}
+  if(newVid){newVid.currentTime=0;newVid.play().catch(()=>{});}
   const zp=slides[cur].querySelector('.zoom-photo');
   if(zp){zp.style.animation='none';zp.offsetHeight;zp.style.animation='';}
 }

@@ -18,8 +18,7 @@
  */
 
 const REENIO_BASE  = 'https://lets-beach.reenio.com/en/api/Term';
-const MAX_EVENTS   = 5;   // show up to 5 upcoming events
-const WEEKS_AHEAD  = 8;   // fetch 8 weeks of data (covers ~2 months)
+const MAX_EVENTS   = 5;
 const TZ           = 'Europe/Prague';
 
 // ─── IN-MEMORY CACHE (survives warm container restarts within ~hours) ────────
@@ -58,15 +57,23 @@ async function fetchAndFilter() {
   const now    = new Date();
   const allRaw = [];
 
-  // Fetch weekly – Reenio shows a week view per request, so we step by 7 days
-  // Spread requests across WEEKS_AHEAD weeks to capture all upcoming slots
-  const requests = [];
-  for (let w = 0; w < WEEKS_AHEAD; w++) {
-    const d = new Date(now.getTime() + w * 7 * 86400000);
-    const dateStr     = d.toISOString().split('T')[0];
-    const endMonthStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-    requests.push({ dateStr, endMonthStr });
+  // Reenio returns ~3 days per request (current day view).
+  // Strategy: daily for first 14 days (catches all near-future slots),
+  // then weekly for days 14-56 (catches camps/special events further out).
+  // All fired in parallel → ~200ms total.
+  const dates = new Set();
+  for (let d = 0; d < 14; d++) {           // daily: next 2 weeks
+    const dt = new Date(now.getTime() + d * 86400000);
+    dates.add(dt.toISOString().split('T')[0]);
   }
+  for (let w = 2; w < 8; w++) {            // weekly: weeks 3-8
+    const dt = new Date(now.getTime() + w * 7 * 86400000);
+    dates.add(dt.toISOString().split('T')[0]);
+  }
+  const requests = Array.from(dates).map(dateStr => ({
+    dateStr,
+    endMonthStr: dateStr.slice(0, 7),       // YYYY-MM
+  }));
 
   // Fire all requests in parallel (faster, ~200ms total vs 200ms×8)
   const results = await Promise.allSettled(
