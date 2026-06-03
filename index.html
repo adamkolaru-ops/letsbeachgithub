@@ -615,10 +615,27 @@ let cur=0;
 const slides=document.querySelectorAll('.hero-slide');
 const dots=document.querySelectorAll('.hero-dot');
 
+// Replace a video slide with its photo fallback (graceful degradation)
+function swapVideoForPhoto(slide){
+  const fallback = slide.dataset.fallback || 'post_004_C9sgjSHObgW.jpg';
+  const img = document.createElement('img');
+  img.src = fallback;
+  img.className = 'zoom-photo';
+  const vid = slide.querySelector('video');
+  if(vid) slide.replaceChild(img, vid);
+}
+
 function tryPlay(vid){
   if(!vid) return;
-  vid.muted=true; // ensure muted before play (iOS requirement)
-  vid.play().catch(()=>{});
+  vid.muted = true;
+  const p = vid.play();
+  if(p !== undefined){
+    p.catch(()=>{
+      // Autoplay blocked (iOS Low Power Mode, browser policy, etc.)
+      // Gracefully fall back to photo with zoom animation
+      swapVideoForPhoto(vid.closest('.hero-slide'));
+    });
+  }
 }
 
 function goSlide(n){
@@ -633,19 +650,10 @@ function goSlide(n){
   if(zp){zp.style.animation='none';zp.offsetHeight;zp.style.animation='';}
 }
 
-// Try autoplay on load
+// Try autoplay on all video slides at load
 document.querySelectorAll('.hero-slide video').forEach(v=>tryPlay(v));
 
-// iOS Safari: resume play on first user touch (fixes blocked autoplay)
-document.addEventListener('touchstart', function iosUnlock(){
-  document.querySelectorAll('.hero-slide video').forEach(v=>tryPlay(v));
-  // Play only the active slide
-  const activeVid=slides[cur]?.querySelector('video');
-  if(activeVid) tryPlay(activeVid);
-  document.removeEventListener('touchstart', iosUnlock);
-}, {once:true, passive:true});
-
-setInterval(()=>goSlide((cur+1)%slides.length), 6000); // 6s per slide
+setInterval(()=>goSlide((cur+1)%slides.length), 6000);
 
 // ── REVEAL ──
 const obs=new IntersectionObserver(entries=>{
