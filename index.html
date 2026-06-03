@@ -26,7 +26,7 @@ nav.solid{background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
 .nav-cta:hover{background:#c94d10!important;}
 
 /* ── HERO ── */
-.hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
 .hero-slides{position:absolute;inset:0;}
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease-in-out;}
 .hero-slide.active{opacity:1;}
@@ -182,67 +182,102 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   .nav-hamburger{display:flex;}
   .nav-right{gap:0.3rem;}
 
-  /* containers + sections */
+  /* containers */
   .container{padding:0 1.2rem;}
-  .about{padding:4rem 0;}
-  .events-section{padding:4rem 0;}
-  .wa-community{padding:4rem 0;}
-  .instagram-section{padding:4rem 0;}
-  .booking{padding:3.5rem 0;}
 
-  /* hero */
-  .hero-title{font-size:clamp(3rem,13vw,5rem);}
-  .hero-sub{font-size:0.82rem;letter-spacing:0.1em;}
-  .hero-dots{bottom:1.2rem;gap:0.6rem;}
+  /* ── HERO: 62svh → events section peek from below ──
+     100vh is broken on mobile (address bar eats space).
+     svh = small viewport height = stable, no jumps.
+     62% lets ticker + first event row be visible on load.        */
+  .hero{
+    height:62svh;
+    height:62vh; /* fallback for old browsers */
+    min-height:320px;
+  }
+  .hero-title{font-size:clamp(2.8rem,12vw,4.5rem);}
+  .hero-eyebrow{margin-bottom:0.8rem;}
+  .hero-sub{font-size:0.8rem;letter-spacing:0.08em;margin:1rem 0 1.8rem;}
+  .btn-hero{padding:0.85rem 2rem;font-size:0.8rem;}
+  .hero-dots{bottom:1rem;gap:0.5rem;}
   .hero-dot{min-width:26px;height:12px;display:flex;align-items:center;}
   .hero-dot::after{content:'';display:block;width:100%;height:2px;background:inherit;border-radius:1px;}
 
-  /* events */
-  .events-section-header{flex-direction:column;align-items:flex-start;gap:0.6rem;margin-bottom:2rem;}
-  .events-section-header .btn-ghost{display:none;} /* only bottom btn on mobile */
-  .event-row{display:flex;flex-direction:column;padding:1.2rem 1rem;gap:0;}
-  .event-row-date{order:1;display:flex;gap:0.4rem;align-items:center;margin-bottom:0.4rem;}
-  .event-row-date strong{font-size:0.82rem;color:var(--muted);font-weight:500;}
-  .event-row-date span{font-size:0.75rem;color:var(--muted);}
+  /* ── EVENTS: 2rem padding (8pt grid × 4 = 32px) ── */
+  .events-section{padding:2rem 0 2.5rem;}
+  .events-section-header{flex-direction:column;align-items:flex-start;gap:0.4rem;margin-bottom:1.2rem;}
+  .events-section-header h2.section-title{font-size:clamp(1.5rem,7vw,2rem);}
+  .events-section-header .btn-ghost{display:none;}
+  .event-row{
+    display:flex;flex-direction:column;
+    padding:0.9rem 1rem;gap:0.25rem;
+  }
+  .event-row-date{
+    order:1;display:flex;gap:0.35rem;
+    align-items:center;margin-bottom:0.2rem;
+  }
+  .event-row-date strong{font-size:0.78rem;color:var(--muted);font-weight:500;}
+  .event-row-date span{font-size:0.72rem;color:var(--muted);}
   .event-row-body{order:2;}
-  .event-row-name{font-size:0.95rem;}
-  .event-row-meta{font-size:0.75rem;}
-  .event-row .btn-orange{order:3;margin-top:0.9rem;width:100%;justify-content:center;font-size:0.78rem;}
+  .event-row-tag{font-size:0.58rem;margin-bottom:0.2rem;}
+  .event-row-name{font-size:0.9rem;margin-bottom:0.15rem;}
+  .event-row-meta{font-size:0.72rem;}
+  .event-row .btn-orange{
+    order:3;margin-top:0.7rem;
+    width:100%;justify-content:center;
+    font-size:0.76rem;padding:0.75rem;min-height:44px;
+  }
 
-  /* about */
-  .about-grid{grid-template-columns:1fr;gap:2rem;}
-  .about-circle{width:200px;height:200px;}
+  /* ── ABOUT: 2rem padding, no logo mark, smaller photo ── */
+  .about{padding:2rem 0 2.5rem;}
+  .about-grid{grid-template-columns:1fr;gap:1.5rem;}
+  .about-circle{width:140px;height:140px;}
+  .about-logo-mark{display:none;}  /* decorative, not needed on mobile */
+  .about-text .body-text{font-size:0.88rem;line-height:1.75;}
+  .about-links{margin-top:1.2rem;}
 
-  /* WA – hide QR (can't scan own phone), show button prominently */
-  .wa-community-inner{grid-template-columns:1fr;gap:1.5rem;}
+  /* ── WA: 2rem padding, no QR, big button ── */
+  .wa-community{padding:2rem 0 2.5rem;}
+  .wa-community-inner{grid-template-columns:1fr;gap:1rem;}
   .wa-qr-col{display:none;}
-  .wa-community-title{font-size:clamp(1.6rem,7vw,2.4rem);}
-  .wa-community-sub{max-width:100%;}
-  .btn-wa{width:100%;justify-content:center;font-size:0.82rem;padding:1rem;}
+  .wa-community-label{margin-bottom:0.4rem;}
+  .wa-community-title{font-size:clamp(1.5rem,7vw,2.2rem);margin-bottom:0.4rem;}
+  .wa-community-sub{font-size:0.84rem;margin-bottom:1.2rem;max-width:100%;}
+  .btn-wa{width:100%;justify-content:center;font-size:0.82rem;padding:0.95rem;}
 
-  /* instagram */
-  .instagram-header{flex-direction:column;align-items:flex-start;gap:0.6rem;margin-bottom:1.5rem;}
+  /* ── INSTAGRAM: 2.5rem padding, 2×2 grid ── */
+  .instagram-section{padding:2rem 0 2.5rem;}
+  .instagram-header{flex-direction:column;align-items:flex-start;gap:0.4rem;margin-bottom:1.2rem;}
+  .instagram-header h2.section-title{font-size:clamp(1.4rem,7vw,1.8rem);}
   .insta-grid{grid-template-columns:repeat(2,1fr);}
+  .insta-footer{margin-top:1.2rem;}
   .insta-footer .btn-ghost{width:100%;justify-content:center;}
 
-  /* booking CTA */
+  /* ── BOOKING CTA: tighter ── */
+  .booking{padding:2.5rem 0;}
+  .booking h2{font-size:clamp(2rem,10vw,3.5rem);}
+  .booking p{margin-bottom:1.5rem;}
   .btn-white{width:100%;justify-content:center;}
 
-  /* footer */
-  footer{padding:3rem 1.2rem 2rem;}
-  .footer-top{grid-template-columns:auto 1fr;}.footer-tagline{text-align:right;}
-  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
-  .footer-links{justify-content:center;gap:0.8rem 1.2rem;}
+  /* ── FOOTER ── */
+  footer{padding:2rem 1.2rem 1.5rem;}
+  .footer-top{grid-template-columns:1fr auto;margin-bottom:1.5rem;}
+  .footer-tagline{text-align:right;}
+  .footer-bottom{flex-direction:column;gap:0.8rem;text-align:center;padding-top:1rem;}
+  .footer-links{justify-content:center;gap:0.6rem 1rem;}
+  footer p{font-size:0.62rem;}
 
-  /* cookie */
-  .cookie-banner{flex-direction:column;align-items:flex-start;padding:1rem 1.2rem;gap:0.8rem;}
+  /* ── COOKIE ── */
+  .cookie-banner{flex-direction:column;align-items:flex-start;padding:0.9rem 1.2rem;gap:0.7rem;}
   .cookie-actions{width:100%;gap:0.6rem;}
-  .cookie-accept,.cookie-decline{flex:1;text-align:center;min-height:44px;}
+  .cookie-accept,.cookie-decline{flex:1;text-align:center;min-height:44px;justify-content:center;}
 }
-@media(max-width:420px){
-  .about-circle{width:160px;height:160px;}
-  .wa-community-inner{gap:1.2rem;}
-  .hero-title{font-size:clamp(2.8rem,14vw,4.5rem);}
+
+/* ── Very small phones (< 390px) ── */
+@media(max-width:390px){
+  .hero-title{font-size:clamp(2.5rem,13vw,4rem);}
+  .hero{min-height:300px;}
+  .event-row-name{font-size:0.85rem;}
+  .wa-community-title{font-size:1.4rem;}
 }
 </style>
 </head>
