@@ -1,70 +1,93 @@
 /**
  * /api/events – Smart Reenio event scraper (no API key needed)
  *
- * How it works:
- *   Calls Reenio's internal public API (the same endpoint the booking page uses),
- *   then applies smart filtering to return only real public group events.
+ * Caching strategy:
+ *   - CDN (Vercel Edge): s-maxage=86400 → cached 24h across all users
+ *   - In-memory module cache: 23h fallback for warm function containers
+ *   → Reenio is called at most once per day per region
  *
  * Filtering logic (reliable):
  *   - reservationType === 1  →  ALWAYS private (individual booking slot) → exclude
  *   - reservationType === 2  →  group/public event → include
- *   - maxCapacity === 1       →  extra safety: individual slot → exclude
- *   - Deduplicates recurring: same event ID may repeat daily/weekly → show once (next occurrence)
+ *   - maxCapacity === 1       →  extra safety → exclude
  *
- * No dependencies. No API key. Works out of the box.
+ * Deduplication:
+ *   - Dedup only on (id + start) to prevent the same slot appearing twice
+ *   - Same name, different date/time = different events → all shown
+ *   - e.g. "Wake up and Let's Beach" Mon + Tue + Wed = 3 separate rows ✓
  */
 
-const REENIO_BASE = 'https://lets-beach.reenio.com/en/api/Term';
-const MAX_EVENTS  = 5;
-const MONTHS_AHEAD = 3; // look 3 months forward
+const REENIO_BASE  = 'https://lets-beach.reenio.com/en/api/Term';
+const MAX_EVENTS   = 7;   // show up to 7 upcoming events
+const WEEKS_AHEAD  = 8;   // fetch 8 weeks of data (covers ~2 months)
+const TZ           = 'Europe/Prague';
 
-// Prague is UTC+1/UTC+2. Use 'Europe/Prague' for display.
-const TZ = 'Europe/Prague';
+// ─── IN-MEMORY CACHE (survives warm container restarts within ~hours) ────────
+let _cache     = null;
+let _cacheTime = 0;
+const CACHE_TTL_MS = 23 * 60 * 60 * 1000; // 23 hours
 
 // ─── MAIN HANDLER ────────────────────────────────────────────────────────────
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=60');
+  // CDN caches for 24h; stale for another hour while revalidating in background
+  res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate=3600');
+
+  // Serve from in-memory cache if fresh
+  if (_cache && Date.now() - _cacheTime < CACHE_TTL_MS) {
+    return res.status(200).json({ events: _cache, source: 'reenio-live', cached: true });
+  }
 
   try {
     const events = await fetchAndFilter();
+    _cache     = events;
+    _cacheTime = Date.now();
     return res.status(200).json({ events, source: 'reenio-live' });
   } catch (err) {
     console.error('Reenio scrape error:', err.message);
-    return res.status(200).json({ events: PLACEHOLDER, source: 'placeholder' });
+    // Return stale cache if available, otherwise placeholder
+    const fallback = _cache || PLACEHOLDER;
+    return res.status(200).json({ events: fallback, source: _cache ? 'reenio-stale' : 'placeholder' });
   }
 }
 
 // ─── FETCH + FILTER ───────────────────────────────────────────────────────────
 
 async function fetchAndFilter() {
-  const now   = new Date();
+  const now    = new Date();
   const allRaw = [];
 
-  // Fetch 3 months of data (one request per month)
-  for (let m = 0; m < MONTHS_AHEAD; m++) {
-    const d = new Date(now.getFullYear(), now.getMonth() + m, m === 0 ? now.getDate() : 1);
-    const dateStr     = d.toISOString().split('T')[0];              // YYYY-MM-DD
-    const endMonthStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; // YYYY-MM
+  // Fetch weekly – Reenio shows a week view per request, so we step by 7 days
+  // Spread requests across WEEKS_AHEAD weeks to capture all upcoming slots
+  const requests = [];
+  for (let w = 0; w < WEEKS_AHEAD; w++) {
+    const d = new Date(now.getTime() + w * 7 * 86400000);
+    const dateStr     = d.toISOString().split('T')[0];
+    const endMonthStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    requests.push({ dateStr, endMonthStr });
+  }
 
-    const body = new URLSearchParams({ date: dateStr, endDate: endMonthStr });
+  // Fire all requests in parallel (faster, ~200ms total vs 200ms×8)
+  const results = await Promise.allSettled(
+    requests.map(({ dateStr, endMonthStr }) =>
+      fetch(`${REENIO_BASE}/List`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'User-Agent': 'Mozilla/5.0',
+        },
+        body: new URLSearchParams({ date: dateStr, endDate: endMonthStr }).toString(),
+      }).then(r => r.ok ? r.json() : null)
+    )
+  );
 
-    const resp = await fetch(`${REENIO_BASE}/List`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'User-Agent': 'Mozilla/5.0',
-      },
-      body: body.toString(),
-    });
-
-    if (!resp.ok) continue;
-    const json = await resp.json();
-    const events = json?.data?.events;
-    if (Array.isArray(events)) allRaw.push(...events);
+  for (const r of results) {
+    if (r.status === 'fulfilled' && r.value?.data?.events) {
+      allRaw.push(...r.value.data.events);
+    }
   }
 
   if (allRaw.length === 0) throw new Error('No data returned from Reenio');
@@ -89,23 +112,19 @@ async function fetchAndFilter() {
     return true;
   });
 
-  // ── SORT by date ──
+  // ── SORT by date ascending ──
   publicEvents.sort((a, b) => new Date(a.start) - new Date(b.start));
 
-  // ── DEDUPLICATE recurring events ──
-  // Same event ID repeats daily/weekly → keep only next occurrence
-  const seenIds  = new Set();
-  const seenNames = new Set();
-  const deduped  = [];
+  // ── DEDUPLICATE only exact same slot (id + start) ──
+  // Same name, different date/time = keep all (e.g. Wake up Mon + Tue + Wed)
+  // Same id + same start = API returned duplicate entry → remove
+  const seenSlots = new Set();
+  const deduped   = [];
 
   for (const e of publicEvents) {
-    const name = getEventName(e).trim().toLowerCase();
-    // Use event ID for dedup (same recurring template)
-    if (seenIds.has(e.id)) continue;
-    // Also dedup by name (different IDs but same event type)
-    if (seenNames.has(name)) continue;
-    seenIds.add(e.id);
-    seenNames.add(name);
+    const slotKey = `${e.id}::${e.start}`;
+    if (seenSlots.has(slotKey)) continue;
+    seenSlots.add(slotKey);
     deduped.push(e);
     if (deduped.length >= MAX_EVENTS) break;
   }
