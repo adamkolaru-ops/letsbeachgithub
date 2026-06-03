@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camps – Let's Beach</title>
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--beige:#f0ede6;--beige2:#e8e2d8;--dark:#181610;--olive:#3a3a26;--orange:#e05c1a;--muted:#7a7060;--white:#faf9f7;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--dark);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
+.nav-left,.nav-right{display:flex;align-items:center;gap:1.8rem;list-style:none;}
+.nav-right{justify-content:flex-end;}
+.nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
+.nav-left a:hover,.nav-right a:hover,.nav-left a.active,.nav-right a.active{color:var(--orange);}
+.nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-img{height:26px;filter:brightness(0) invert(1);}
+.nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
+.nav-cta:hover{background:#c94d10!important;}
+.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
+.label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.7rem;}
+.label-orange{color:var(--orange)!important;}
+.body-text{font-size:0.92rem;line-height:1.85;color:var(--muted);font-weight:300;}
+.btn-orange{display:inline-block;background:var(--orange);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.8rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-orange:hover{background:#c94d10;transform:translateY(-2px);}
+.btn-white{display:inline-block;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-white:hover{background:var(--beige);transform:translateY(-2px);}
+.btn-ghost{display:inline-block;border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s;}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);}
+
+/* PAGE HERO */
+.page-hero{position:relative;height:70vh;min-height:500px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
+.page-hero video,.page-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.page-hero::after{content:'';position:absolute;inset:0;background:rgba(15,13,8,0.55);}
+.page-hero-content{position:relative;z-index:2;padding:0 2rem;}
+.page-hero-content .label{color:rgba(255,255,255,0.4);margin-bottom:1rem;}
+.page-hero-content h1{font-size:clamp(2.8rem,7vw,6rem);font-weight:700;color:#fff;line-height:0.9;letter-spacing:-0.01em;}
+.page-hero-content h1 em{display:block;font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.82em;color:var(--orange);}
+.page-hero-content p{font-size:0.9rem;color:rgba(255,255,255,0.5);margin-top:1.2rem;font-weight:300;letter-spacing:0.06em;}
+
+/* INTRO */
+.camps-intro{background:var(--white);padding:6rem 0;}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.intro-text h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.05;color:var(--dark);margin-bottom:1.2rem;}
+.intro-text h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
+.intro-text .body-text{margin-bottom:1rem;}
+.intro-photo{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+
+/* CAMP CARDS */
+.camps-list{background:var(--beige);padding:6rem 0;}
+.camps-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:4rem;}
+.camps-grid{display:flex;flex-direction:column;gap:1px;background:rgba(24,22,16,0.08);}
+.camp-card{background:var(--white);display:grid;grid-template-columns:1fr 1fr;align-items:stretch;transition:background 0.2s;}
+.camp-card:hover{background:var(--beige2);}
+.camp-card-photo{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;}
+.camp-card-body{padding:3.5rem;}
+.camp-card-tag{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:0.6rem;}
+.camp-card-title{font-size:1.7rem;font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:0.2rem;}
+.camp-card-title em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;}
+.camp-card-sub{font-size:0.72rem;color:var(--muted);letter-spacing:0.12em;margin-bottom:1.2rem;}
+.camp-card-desc{font-size:0.88rem;line-height:1.8;color:var(--muted);font-weight:300;margin-bottom:1.8rem;}
+.camp-features{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:2rem;}
+.camp-feature-item{display:flex;align-items:center;gap:0.7rem;font-size:0.83rem;color:var(--dark);}
+.camp-feature-item::before{content:'';width:5px;height:5px;background:var(--orange);border-radius:50%;flex-shrink:0;}
+.camp-card:nth-child(even) .camp-card-photo{order:2;}
+
+/* VIDEO */
+.video-section{position:relative;height:50vh;min-height:380px;overflow:hidden;}
+.video-section video{width:100%;height:100%;object-fit:cover;display:block;}
+.video-section::after{content:'';position:absolute;inset:0;background:rgba(15,13,8,0.48);}
+.video-caption{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;}
+.video-caption p{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(1.6rem,4vw,3rem);color:#fff;line-height:1.2;max-width:600px;}
+
+/* FAQ */
+.faq-section{background:var(--white);padding:6rem 0;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+.faq-item{padding-bottom:2rem;border-bottom:1px solid rgba(24,22,16,0.08);}
+.faq-q{font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:0.6rem;}
+.faq-a{font-size:0.88rem;color:var(--muted);line-height:1.75;font-weight:300;}
+
+/* CTA */
+.cta-dark{background:var(--dark);padding:6rem 0;text-align:center;}
+.cta-dark .label{color:rgba(255,255,255,0.3);margin-bottom:1.2rem;}
+.cta-dark h2{font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#fff;line-height:0.9;margin-bottom:1rem;}
+.cta-dark h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);font-size:0.82em;}
+.cta-dark p{color:rgba(255,255,255,0.45);font-size:0.9rem;font-weight:300;margin-bottom:2.5rem;letter-spacing:0.05em;}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
+.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
+.footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.footer-brand img{height:24px;filter:brightness(0) invert(1);opacity:0.4;}
+.footer-brand span{font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.02em;}
+.footer-tagline{text-align:right;font-size:0.82rem;color:rgba(255,255,255,0.35);font-style:italic;font-family:'DM Serif Display',serif;}
+.footer-tagline strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:600;color:rgba(255,255,255,0.6);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-links{display:flex;gap:2rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:0.68rem;letter-spacing:0.12em;text-transform:lowercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange);}
+footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}
+@media(max-width:860px){
+  nav{padding:0 1.5rem;grid-template-columns:1fr auto;}.nav-left{display:none;}
+  .container{padding:0 1.5rem;}
+  .intro-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .camp-card{grid-template-columns:1fr;}.camp-card-photo{min-height:220px;}.camp-card:nth-child(even) .camp-card-photo{order:0;}
+  .camp-card-body{padding:2rem 1.5rem;}
+  .camps-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+  .faq-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{justify-content:center;gap:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-left">
+    <li><a href="index.html">home</a></li>
+    <li><a href="o-mne.html">about</a></li>
+    <li><a href="treninky.html">training</a></li>
+    <li><a href="kempy.html" class="active">camps</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo white.png" alt="Let's Beach" class="nav-logo-img">
+      <span class="nav-logo-name">Let's Beach</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="akce.html">events</a>
+    <a href="merch.html">merch</a>
+    <a href="kontakt.html">contact</a>
+    <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <video autoplay muted loop playsinline class="page-hero-img">
+    <source src="videos/post_004_C9sgjSHObgW_child4.mp4" type="video/mp4">
+    <source src="videos/post_003_C9soE0pOgXj.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-content">
+    <span class="label">beach · surf · adventure</span>
+    <h1>camps<em>&amp; trips</em></h1>
+    <p>Intensive beach volleyball, surfing, and great people – all in one place.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="camps-intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-text reveal">
+        <span class="label label-orange">more than training</span>
+        <h2>a camp is<br><em>an experience</em></h2>
+        <p class="body-text">Camps are more than intensive training – they're days full of movement, new friends, and moments you'll remember for a long time. Technique, tactics, fitness, but above all – great energy.</p>
+        <p class="body-text" style="margin-top:0.8rem;">We run beach volleyball camps in Prague and surf trips to the sea. For all levels, small groups, maximum attention.</p>
+      </div>
+      <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Beach kemp" class="intro-photo reveal rd1">
+    </div>
+  </div>
+</section>
+
+<!-- CAMPS -->
+<section class="camps-list">
+  <div class="container">
+    <div class="camps-header reveal">
+      <div>
+        <span class="label">choose a camp</span>
+        <h2 class="section-title" style="font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.05;color:var(--dark);">what<em style="font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);">we offer</em></h2>
+      </div>
+    </div>
+    <div class="camps-grid">
+
+      <!-- Letní beach kemp -->
+      <div class="camp-card reveal">
+        <img src="post_004_C9sgjSHObgW.jpg" alt="Letní beach kemp" class="camp-card-photo">
+        <div class="camp-card-body">
+          <span class="camp-card-tag">Prague · Summer 2025</span>
+          <div class="camp-card-title">Summer beach<em>camp</em></div>
+          <div class="camp-card-sub">5–7 days · Prague · max. 8 players</div>
+          <p class="camp-card-desc">Intensive week-long camp for all levels on Prague's beach courts. Two sessions a day – technique, tactics, game situations. Evenings? Good vibes and great company.</p>
+          <div class="camp-features">
+            <div class="camp-feature-item">2 training sessions per day</div>
+            <div class="camp-feature-item">video technique analysis</div>
+            <div class="camp-feature-item">max. 8 players</div>
+            <div class="camp-feature-item">beginners &amp; advanced</div>
+          </div>
+          <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">reserve a spot</a>
+        </div>
+      </div>
+
+      <!-- Surf & Beach -->
+      <div class="camp-card reveal">
+        <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Surf Beach kemp" class="camp-card-photo">
+        <div class="camp-card-body">
+          <span class="camp-card-tag">Sea · trip</span>
+          <div class="camp-card-title">Surf &amp; Beach<em>camp</em></div>
+          <div class="camp-card-sub">7–10 days · seaside · small group</div>
+          <p class="camp-card-desc">Surf and beach volleyball? The perfect combo. Waves in the morning, sand in the afternoon, bonfire in the evening. A trip for those who want more than just training.</p>
+          <div class="camp-features">
+            <div class="camp-feature-item">surfing for all levels</div>
+            <div class="camp-feature-item">beach volleyball every day</div>
+            <div class="camp-feature-item">accommodation included</div>
+            <div class="camp-feature-item">transport organised</div>
+          </div>
+          <a href="kontakt.html" class="btn-orange">I'm interested</a>
+        </div>
+      </div>
+
+      <!-- Víkendový workshop -->
+      <div class="camp-card reveal">
+        <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Víkendový workshop" class="camp-card-photo">
+        <div class="camp-card-body">
+          <span class="camp-card-tag">Weekend · Workshop</span>
+          <div class="camp-card-title">Weekend<em>workshop</em></div>
+          <div class="camp-card-sub">Sat + Sun · Prague · max. 6 players</div>
+          <p class="camp-card-desc">Two intensive days focused on specific skills – attack, block, reception, or game IQ. A great way to make a big leap in just one weekend.</p>
+          <div class="camp-features">
+            <div class="camp-feature-item">Saturday + Sunday</div>
+            <div class="camp-feature-item">specific focus (attack / block / reception)</div>
+            <div class="camp-feature-item">max. 6 players</div>
+            <div class="camp-feature-item">video analysis</div>
+          </div>
+          <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">see dates</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO BREAK -->
+<div class="video-section">
+  <video autoplay muted loop playsinline>
+    <source src="videos/post_001_DAV5zhNITcE_child0.mp4" type="video/mp4">
+    <source src="videos/post_000_DQaIZmPDchq.mp4" type="video/mp4">
+  </video>
+  <div class="video-caption">
+    <p>every camp is a different story — but always on the sand.</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div style="margin-bottom:3.5rem;" class="reveal">
+      <span class="label label-orange">frequently asked</span>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.05;color:var(--dark);">What <em style="font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);">you need to know</em></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q">What level are the camps suitable for?</div>
+        <p class="faq-a">Camps are for everyone – from complete beginners to advanced players. We always tailor the content to the group.</p>
+      </div>
+      <div class="faq-item reveal rd1">
+        <div class="faq-q">What should I bring?</div>
+        <p class="faq-a">Sportswear, sunscreen, water, and a good attitude. Equipment (balls, nets) is provided.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How big are the groups?</div>
+        <p class="faq-a">Maximum 6–8 players. Small groups are intentional – everyone gets individual attention.</p>
+      </div>
+      <div class="faq-item reveal rd1">
+        <div class="faq-q">How do I sign up?</div>
+        <p class="faq-a">Via Reenio or drop us a message through the contact form. Spots are limited, so don't wait.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Are there camps for kids too?</div>
+        <p class="faq-a">Yes, we run camps for both youth and adults. Age groups are always listed for each specific camp.</p>
+      </div>
+      <div class="faq-item reveal rd1">
+        <div class="faq-q">Where do the Prague camps take place?</div>
+        <p class="faq-a">On beach volleyball courts in Prague. Exact location is confirmed after registration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-dark">
+  <div class="container">
+    <span class="label">ready?</span>
+    <h2>pick your<br><em>camp</em></h2>
+    <p>Spots are limited – sign up as soon as possible.</p>
+    <div class="cta-buttons">
+      <a href="https://lets-beach.reenio.com" target="_blank" class="btn-white">book on Reenio</a>
+      <a href="kontakt.html" class="btn-ghost">message Filip</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="footer-brand">
+      <img src="logo white.png" alt=""><span>Let's Beach</span>
+    </a>
+    <div></div>
+    <div class="footer-tagline">play in every <strong>moment.</strong></div>
+  </div>
+  <div class="footer-bottom">
+    <ul class="footer-links">
+      <li><a href="o-mne.html">about</a></li>
+      <li><a href="treninky.html">training</a></li>
+      <li><a href="kempy.html">camps</a></li>
+      <li><a href="akce.html">events</a></li>
+      <li><a href="merch.html">merch</a></li>
+      <li><a href="kontakt.html">contact</a></li>
+      <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
+    </ul>
+    <p>&copy; 2025 Let's Beach · Filip Rieger</p>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – Let's Beach</title>
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--beige:#f0ede6;--beige2:#e8e2d8;--dark:#181610;--olive:#3a3a26;--orange:#e05c1a;--muted:#7a7060;--white:#faf9f7;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--dark);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
+.nav-left,.nav-right{display:flex;align-items:center;gap:1.8rem;list-style:none;}
+.nav-right{justify-content:flex-end;}
+.nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
+.nav-left a:hover,.nav-right a:hover,.nav-left a.active,.nav-right a.active{color:var(--orange);}
+.nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-img{height:26px;filter:brightness(0) invert(1);}
+.nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
+.nav-cta:hover{background:#c94d10!important;}
+.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
+.label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.7rem;}
+.label-orange{color:var(--orange);}
+.body-text{font-size:0.92rem;line-height:1.85;color:var(--muted);font-weight:300;}
+
+.page-hero{background:var(--dark);padding:5rem 0 4rem;text-align:center;}
+.page-hero .label{color:rgba(255,255,255,0.35);margin-bottom:1rem;}
+.page-hero h1{font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#fff;line-height:0.95;letter-spacing:-0.01em;}
+.page-hero h1 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);font-size:0.88em;}
+.page-hero p{font-size:0.9rem;color:rgba(255,255,255,0.45);margin-top:1.2rem;font-weight:300;letter-spacing:0.06em;}
+
+/* CONTACT MAIN */
+.contact-main{background:var(--white);padding:6rem 0;}
+.contact-grid{display:grid;grid-template-columns:5fr 6fr;gap:6rem;align-items:start;}
+
+/* LEFT – info */
+.contact-info-photo{position:relative;margin-bottom:2.5rem;}
+.contact-info-photo img.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;}
+.contact-info-photo .circle{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  width:90px;height:90px;border-radius:50%;overflow:hidden;
+  border:4px solid var(--white);box-shadow:0 4px 16px rgba(0,0,0,0.12);
+}
+.contact-info-photo .circle img{width:100%;height:100%;object-fit:cover;}
+
+.contact-info h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:1rem;}
+.contact-info h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
+.contact-info .body-text{margin-bottom:2rem;}
+
+.contact-channels{display:flex;flex-direction:column;gap:0;}
+.channel{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(24,22,16,0.08);text-decoration:none;color:var(--dark);transition:color 0.2s,padding-left 0.2s;}
+.channel:last-child{border-bottom:none;}
+.channel:hover{color:var(--orange);padding-left:0.3rem;}
+.channel-icon{width:36px;height:36px;background:var(--beige);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;transition:background 0.2s;}
+.channel:hover .channel-icon{background:rgba(224,92,26,0.1);}
+.channel-info{}
+.channel-type{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.15rem;}
+.channel-value{font-size:0.88rem;font-weight:500;color:inherit;}
+
+/* RIGHT – form */
+.contact-form-wrap{}
+.contact-form-wrap h3{font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;}
+.contact-form-wrap h3 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--muted);}
+.contact-form-wrap p{font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:2rem;}
+
+.field{margin-bottom:1.2rem;}
+.field label{display:block;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+.field input,.field textarea,.field select{
+  width:100%;background:var(--beige);border:none;border-bottom:1px solid rgba(24,22,16,0.15);
+  color:var(--dark);font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:300;
+  padding:0.8rem 0;outline:none;transition:border-color 0.2s;
+  -webkit-appearance:none; border-radius:0;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-bottom-color:var(--orange);}
+.field input::placeholder,.field textarea::placeholder{color:rgba(24,22,16,0.3);}
+.field textarea{height:130px;resize:none;}
+.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7060' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.5rem center;}
+
+.submit-btn{width:100%;background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;padding:1rem;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s,transform 0.2s;text-transform:lowercase;}
+.submit-btn:hover{background:var(--orange);transform:translateY(-1px);}
+
+/* REENIO CTA */
+.reenio-cta{background:var(--orange);padding:4.5rem 0;text-align:center;}
+.reenio-cta h2{font-size:clamp(2rem,5vw,4rem);font-weight:700;color:#fff;line-height:0.9;margin-bottom:0.8rem;}
+.reenio-cta h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.85em;}
+.reenio-cta p{color:rgba(255,255,255,0.6);font-size:0.88rem;font-weight:300;margin-bottom:2rem;letter-spacing:0.05em;}
+.btn-white{display:inline-block;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-white:hover{background:var(--beige);transform:translateY(-2px);}
+
+footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
+.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
+.footer-brand{font-size:1.25rem;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:none;}
+.footer-logo-img{width:40px;opacity:0.35;filter:brightness(0) invert(1);}
+.footer-tagline{text-align:right;font-size:0.82rem;color:rgba(255,255,255,0.35);font-style:italic;font-family:'DM Serif Display',serif;}
+.footer-tagline strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:600;color:rgba(255,255,255,0.6);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-links{display:flex;gap:2rem;list-style:none;}
+.footer-links a{font-size:0.68rem;letter-spacing:0.12em;text-transform:lowercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange);}
+footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}
+@media(max-width:860px){
+  nav{grid-template-columns:1fr auto;padding:0 1.5rem;}.nav-left{display:none;}.nav-logo{text-align:left;}
+  .container{padding:0 1.5rem;}
+  .contact-grid{grid-template-columns:1fr;gap:3rem;}
+  .contact-info-photo img.portrait{aspect-ratio:4/3;}
+  .contact-info-photo .circle{width:70px;height:70px;bottom:-1rem;right:-1rem;}
+  .footer-top{grid-template-columns:1fr 1fr;}.footer-logo-img{display:none;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-left">
+    <li><a href="index.html">home</a></li>
+    <li><a href="o-mne.html">about</a></li>
+    <li><a href="treninky.html">training</a></li>
+    <li><a href="kempy.html">camps</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo white.png" alt="Let's Beach" class="nav-logo-img">
+      <span class="nav-logo-name">Let's Beach</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="akce.html">events</a>
+    <a href="merch.html">merch</a>
+    <a href="kontakt.html" class="active">contact</a>
+    <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="label">here for you</span>
+    <h1>get in<em>touch</em></h1>
+    <p>I'll get back to you as soon as possible – or book directly on Reenio.</p>
+  </div>
+</div>
+
+<section class="contact-main">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div class="reveal">
+        <div class="contact-info-photo">
+          <img class="portrait" src="post_001_DAV5zhNITcE.jpg" alt="Filip Rieger">
+          <div class="circle"><img src="profile-pic.jpg" alt="Filip Rieger"></div>
+        </div>
+        <span class="label label-orange">contact</span>
+        <h2>Filip <em>Rieger</em></h2>
+        <p class="body-text">Have a question about training, a camp, or a tournament? Drop me a message on Instagram or email. Happy to reply.</p>
+
+        <div class="contact-channels">
+          <a href="mailto:filip@letsbeach.cz" class="channel">
+            <div class="channel-icon">✉</div>
+            <div class="channel-info">
+              <span class="channel-type">email</span>
+              <span class="channel-value">filip@letsbeach.cz</span>
+            </div>
+          </a>
+          <a href="https://instagram.com/rieger.filip" target="_blank" class="channel">
+            <div class="channel-icon">↗</div>
+            <div class="channel-info">
+              <span class="channel-type">instagram · personal</span>
+              <span class="channel-value">@rieger.filip</span>
+            </div>
+          </a>
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="channel">
+            <div class="channel-icon">↗</div>
+            <div class="channel-info">
+              <span class="channel-type">instagram · let's beach</span>
+              <span class="channel-value">@_lets_beach_</span>
+            </div>
+          </a>
+          <a href="https://lets-beach.reenio.com" target="_blank" class="channel">
+            <div class="channel-icon">→</div>
+            <div class="channel-info">
+              <span class="channel-type">online booking</span>
+              <span class="channel-value">lets-beach.reenio.com</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT – FORM -->
+      <div class="contact-form-wrap reveal rd1">
+        <h3>send a <em>message</em></h3>
+        <p>Fill in the form and I'll get back to you as soon as possible.</p>
+        <form onsubmit="handleSubmit(event)">
+          <div class="field">
+            <label>name</label>
+            <input type="text" placeholder="What do people call you?" required>
+          </div>
+          <div class="field">
+            <label>email</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+          <div class="field">
+            <label>I'm interested in</label>
+            <select>
+              <option value="">— select type of training —</option>
+              <option>Individual training</option>
+              <option>Group sessions</option>
+              <option>Summer camp</option>
+              <option>Workshop</option>
+              <option>Tournament</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>message</label>
+            <textarea placeholder="Write anything – your level, questions, when you want to start…"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">send message →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="reenio-cta">
+  <div class="container">
+    <h2>or just go ahead<br><em>&amp; book</em></h2>
+    <p>Everything online via Reenio – no waiting, no emails.</p>
+    <a href="https://lets-beach.reenio.com" target="_blank" class="btn-white">open Reenio</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="footer-brand">Let's Beach</a>
+    <img src="logo white.png" alt="" class="footer-logo-img">
+    <div class="footer-tagline">play in every <strong>moment.</strong></div>
+  </div>
+  <div class="footer-bottom">
+    <ul class="footer-links">
+      <li><a href="o-mne.html">about</a></li>
+      <li><a href="treninky.html">training</a></li>
+      <li><a href="akce.html">events</a></li>
+      <li><a href="kontakt.html">contact</a></li>
+      <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
+    </ul>
+    <p>&copy; 2025 Let's Beach · Filip Rieger</p>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit-btn');
+  btn.textContent = 'sent ✓';
+  btn.style.background = '#3a3a26';
+  e.target.reset();
+  setTimeout(() => { btn.textContent = 'send message →'; btn.style.background = ''; }, 3000);
+}
+</script>
+</body>
+</html>

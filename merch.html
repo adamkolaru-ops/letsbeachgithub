@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merch – Let's Beach</title>
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--beige:#f0ede6;--beige2:#e8e2d8;--dark:#181610;--olive:#3a3a26;--orange:#e05c1a;--muted:#7a7060;--white:#faf9f7;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--dark);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
+.nav-left,.nav-right{display:flex;align-items:center;gap:1.8rem;list-style:none;}
+.nav-right{justify-content:flex-end;}
+.nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
+.nav-left a:hover,.nav-right a:hover,.nav-left a.active,.nav-right a.active{color:var(--orange);}
+.nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-img{height:26px;filter:brightness(0) invert(1);}
+.nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
+.nav-cta:hover{background:#c94d10!important;}
+.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
+.label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.7rem;}
+.label-orange{color:var(--orange)!important;}
+.body-text{font-size:0.92rem;line-height:1.85;color:var(--muted);font-weight:300;}
+.btn-orange{display:inline-block;background:var(--orange);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.8rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-orange:hover{background:#c94d10;transform:translateY(-2px);}
+.btn-dark{display:inline-block;background:var(--dark);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.8rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-dark:hover{background:var(--olive);transform:translateY(-2px);}
+
+/* PAGE HERO */
+.page-hero{background:var(--dark);padding:5rem 0 4rem;text-align:center;}
+.page-hero .label{color:rgba(255,255,255,0.35);margin-bottom:1rem;}
+.page-hero h1{font-size:clamp(2.8rem,7vw,6rem);font-weight:700;color:#fff;line-height:0.9;letter-spacing:-0.01em;}
+.page-hero h1 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);font-size:0.85em;}
+.page-hero p{font-size:0.9rem;color:rgba(255,255,255,0.4);margin-top:1.2rem;font-weight:300;letter-spacing:0.06em;}
+
+/* COMING SOON */
+.coming-soon{background:var(--white);padding:8rem 0;}
+.coming-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.coming-visual{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:var(--beige2);}
+.coming-logo-big{width:55%;opacity:0.15;}
+.coming-badge{position:absolute;bottom:2rem;right:2rem;background:var(--orange);color:#fff;padding:0.7rem 1.2rem;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;}
+.coming-text h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.05;color:var(--dark);margin-bottom:1.2rem;}
+.coming-text h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
+.coming-text .body-text{margin-bottom:1rem;}
+
+/* NOTIFY FORM */
+.notify-form{margin-top:2.5rem;display:flex;gap:0.8rem;flex-wrap:wrap;}
+.notify-form input{flex:1;min-width:200px;background:transparent;border:none;border-bottom:1px solid rgba(24,22,16,0.2);color:var(--dark);font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:300;padding:0.8rem 0;outline:none;transition:border-color 0.2s;}
+.notify-form input:focus{border-bottom-color:var(--orange);}
+.notify-form input::placeholder{color:rgba(24,22,16,0.3);}
+.notify-form button{background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.1em;padding:0.8rem 2rem;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s,transform 0.2s;white-space:nowrap;}
+.notify-form button:hover{background:var(--orange);transform:translateY(-1px);}
+
+/* PREVIEW PRODUCTS */
+.preview-section{background:var(--beige);padding:6rem 0;}
+.preview-header{text-align:center;margin-bottom:4rem;}
+.preview-header h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:0.6rem;}
+.preview-header h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
+.preview-header p{font-size:0.88rem;color:var(--muted);font-weight:300;}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.product-card{background:var(--white);overflow:hidden;}
+.product-img{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.product-img-bg{width:100%;height:100%;object-fit:cover;filter:brightness(0.92);}
+.product-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(240,237,230,0.85);}
+.product-logo{width:45%;opacity:0.5;}
+.product-info{padding:1.5rem;}
+.product-name{font-size:0.95rem;font-weight:600;color:var(--dark);margin-bottom:0.25rem;}
+.product-sub{font-size:0.75rem;color:var(--muted);font-weight:300;letter-spacing:0.08em;margin-bottom:0.8rem;}
+.product-price{font-size:0.82rem;font-weight:500;color:var(--orange);}
+.product-soon{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(24,22,16,0.3);}
+
+/* BRAND */
+.brand-section{background:var(--dark);padding:6rem 0;text-align:center;}
+.brand-logo-display{display:flex;gap:4rem;align-items:center;justify-content:center;margin:3rem 0;flex-wrap:wrap;}
+.brand-logo-item{display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.brand-logo-item img{height:80px;transition:opacity 0.2s;}
+.brand-logo-item img.dark-bg{filter:brightness(0) invert(1);opacity:0.7;}
+.brand-logo-item img.light-bg{opacity:0.7;}
+.brand-logo-caption{font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+
+footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
+.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
+.footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.footer-brand img{height:24px;filter:brightness(0) invert(1);opacity:0.4;}
+.footer-brand span{font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.02em;}
+.footer-tagline{text-align:right;font-size:0.82rem;color:rgba(255,255,255,0.35);font-style:italic;font-family:'DM Serif Display',serif;}
+.footer-tagline strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:600;color:rgba(255,255,255,0.6);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-links{display:flex;gap:2rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:0.68rem;letter-spacing:0.12em;text-transform:lowercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange);}
+footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}
+@media(max-width:860px){
+  nav{padding:0 1.5rem;grid-template-columns:1fr auto;}.nav-left{display:none;}
+  .container{padding:0 1.5rem;}
+  .coming-grid{grid-template-columns:1fr;gap:3rem;}
+  .products-grid{grid-template-columns:1fr 1fr;}
+  .brand-logo-display{gap:2.5rem;}
+  .footer-top{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{justify-content:center;gap:1.2rem;}
+}
+@media(max-width:500px){.products-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-left">
+    <li><a href="index.html">home</a></li>
+    <li><a href="o-mne.html">about</a></li>
+    <li><a href="treninky.html">training</a></li>
+    <li><a href="kempy.html">camps</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo white.png" alt="Let's Beach" class="nav-logo-img">
+      <span class="nav-logo-name">Let's Beach</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="akce.html">events</a>
+    <a href="merch.html" class="active">merch</a>
+    <a href="kontakt.html">contact</a>
+    <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="label">collection</span>
+    <h1>Let's Beach<em>merch</em></h1>
+    <p>Clothing and accessories with the soul of beach volleyball.</p>
+  </div>
+</div>
+
+<!-- COMING SOON -->
+<section class="coming-soon">
+  <div class="container">
+    <div class="coming-grid">
+      <div class="coming-visual reveal">
+        <img src="logo black nobackground.png" alt="Let's Beach" class="coming-logo-big">
+        <div class="coming-badge">Coming soon</div>
+      </div>
+      <div class="coming-text reveal rd1">
+        <span class="label label-orange">first drop · 2025</span>
+        <h2>first<br><em>collection</em></h2>
+        <p class="body-text">We're working on the first Let's Beach merch collection. Tees, hoodies, bags – all designed for people who live beach volleyball on and off the court.</p>
+        <p class="body-text" style="margin-top:0.8rem;">Leave your email and you'll be the first to know when it drops.</p>
+        <form class="notify-form" onsubmit="handleNotify(event)">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">notify me first</button>
+        </form>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.8rem;font-weight:300;">No spam. Just one message when we launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREVIEW -->
+<section class="preview-section">
+  <div class="container">
+    <div class="preview-header reveal">
+      <span class="label label-orange">sneak peek</span>
+      <h2>what's<em>coming</em></h2>
+      <p>A preview of what we're preparing.</p>
+    </div>
+    <div class="products-grid">
+      <div class="reveal">
+        <div class="product-card">
+          <div class="product-img" style="background:var(--beige2);">
+            <img src="logo black nobackground.png" alt="" class="product-logo">
+          </div>
+          <div class="product-info">
+            <div class="product-name">Let's Beach Tee</div>
+            <div class="product-sub">unisex · oversized</div>
+            <div class="product-soon">Soon</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal rd1">
+        <div class="product-card">
+          <div class="product-img" style="background:#2a2820;">
+            <img src="logo white.png" alt="" class="product-logo" style="opacity:0.6;">
+          </div>
+          <div class="product-info">
+            <div class="product-name">Let's Beach Hoodie</div>
+            <div class="product-sub">unisex · heavy weight</div>
+            <div class="product-soon">Soon</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal rd2">
+        <div class="product-card">
+          <div class="product-img" style="background:var(--orange);">
+            <img src="logo white.png" alt="" class="product-logo" style="opacity:0.7;">
+          </div>
+          <div class="product-info">
+            <div class="product-name">Beach Bag</div>
+            <div class="product-sub">canvas bag · logo</div>
+            <div class="product-soon">Soon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND -->
+<section class="brand-section">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="label" style="color:rgba(255,255,255,0.3);">our logo</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#fff;line-height:1.05;margin-bottom:0.5rem;">Let's Beach <em style="font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);">identity</em></h2>
+      <p style="font-size:0.88rem;color:rgba(255,255,255,0.35);font-weight:300;">Hand-drawn logo. Beach courts, net, movement.</p>
+    </div>
+    <div class="brand-logo-display reveal">
+      <div class="brand-logo-item">
+        <img src="logo white.png" alt="Logo bílé" class="dark-bg">
+        <span class="brand-logo-caption">white version</span>
+      </div>
+      <div class="brand-logo-item">
+        <img src="logo black nobackground.png" alt="Logo black" class="light-bg" style="filter:brightness(0) invert(1);opacity:0.5;">
+        <span class="brand-logo-caption">black version</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="footer-brand">
+      <img src="logo white.png" alt=""><span>Let's Beach</span>
+    </a>
+    <div></div>
+    <div class="footer-tagline">play in every <strong>moment.</strong></div>
+  </div>
+  <div class="footer-bottom">
+    <ul class="footer-links">
+      <li><a href="o-mne.html">about</a></li>
+      <li><a href="treninky.html">training</a></li>
+      <li><a href="kempy.html">camps</a></li>
+      <li><a href="akce.html">events</a></li>
+      <li><a href="merch.html">merch</a></li>
+      <li><a href="kontakt.html">contact</a></li>
+      <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
+    </ul>
+    <p>&copy; 2025 Let's Beach · Filip Rieger</p>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function handleNotify(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button');
+  btn.textContent='signed up ✓';
+  btn.style.background='#3a3a26';
+  e.target.querySelector('input').value='';
+  setTimeout(()=>{btn.textContent='notify me first';btn.style.background='';},3000);
+}
+</script>
+</body>
+</html>

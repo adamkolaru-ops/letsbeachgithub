@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About – Let's Beach</title>
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --beige:#f0ede6; --beige2:#e8e2d8; --dark:#181610; --olive:#3a3a26; --orange:#e05c1a; --muted:#7a7060; --white:#faf9f7; }
+*{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--dark);overflow-x:hidden;}
+
+nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
+.nav-left,.nav-right{display:flex;align-items:center;gap:1.8rem;list-style:none;}
+.nav-right{justify-content:flex-end;}
+.nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
+.nav-left a:hover,.nav-right a:hover,.nav-left a.active,.nav-right a.active{color:var(--orange);}
+.nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-img{height:26px;filter:brightness(0) invert(1);}
+.nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
+.nav-cta:hover{background:#c94d10!important;}
+
+.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
+.label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.7rem;}
+.label-orange{color:var(--orange);}
+.body-text{font-size:0.92rem;line-height:1.85;color:var(--muted);font-weight:300;}
+.btn-orange{display:inline-block;background:var(--orange);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.8rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-orange:hover{background:#c94d10;transform:translateY(-2px);}
+
+/* PAGE HERO */
+.page-hero{background:var(--dark);padding:5rem 0 4rem;text-align:center;}
+.page-hero .label{color:rgba(255,255,255,0.35);margin-bottom:1rem;}
+.page-hero h1{font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#fff;line-height:0.95;letter-spacing:-0.01em;}
+.page-hero h1 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);font-size:0.88em;}
+
+/* PROFILE SECTION */
+.profile-section{background:var(--white);padding:6rem 0;}
+.profile-grid{display:grid;grid-template-columns:5fr 6fr;gap:5rem;align-items:start;}
+.profile-photo-wrap{position:relative;}
+.profile-photo-wrap img.main{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;}
+.profile-circle-wrap{
+  display:flex;align-items:center;gap:1.5rem;margin-top:2rem;
+  padding:1.5rem; background:var(--beige);
+}
+.profile-circle{width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+.profile-circle img{width:100%;height:100%;object-fit:cover;}
+.profile-circle-caption{font-size:0.82rem;color:var(--dark);font-weight:500;line-height:1.4;}
+.profile-circle-caption span{display:block;font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;}
+
+.profile-text h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.05;color:var(--dark);margin-bottom:1.5rem;}
+.profile-text h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
+.profile-text .body-text{margin-bottom:1.2rem;}
+.profile-text .body-text:last-of-type{margin-bottom:2rem;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(24,22,16,0.08);margin:1.5rem 0 2rem;}
+.stat-item{background:var(--beige);padding:1.5rem;text-align:center;}
+.stat-num{font-size:2.2rem;font-weight:700;color:var(--dark);line-height:1;}
+.stat-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;}
+
+/* SOCIAL LINKS */
+.social-links{display:flex;flex-direction:column;gap:0;margin-top:1.5rem;}
+.social-link{display:flex;align-items:center;gap:0.6rem;padding:0.7rem 0;border-bottom:1px solid rgba(24,22,16,0.08);color:var(--dark);text-decoration:none;font-size:0.88rem;transition:color 0.2s,padding-left 0.2s;}
+.social-link:last-child{border-bottom:none;}
+.social-link:hover{color:var(--orange);padding-left:0.3rem;}
+
+/* PHILOSOPHY */
+.philosophy{background:var(--beige2);padding:6rem 0;}
+.philosophy-inner{max-width:700px;margin:0 auto;text-align:center;}
+.philosophy-quote{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3.5vw,2.8rem);font-style:italic;color:var(--dark);line-height:1.25;margin-bottom:1.5rem;}
+.philosophy-quote strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:700;color:var(--orange);}
+.philosophy-body{font-size:0.9rem;color:var(--muted);line-height:1.85;font-weight:300;}
+
+/* FOOTER */
+footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
+.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
+.footer-brand{font-size:1.25rem;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:none;}
+.footer-logo-img{width:40px;opacity:0.35;filter:brightness(0) invert(1);}
+.footer-tagline{text-align:right;font-size:0.82rem;color:rgba(255,255,255,0.35);font-style:italic;font-family:'DM Serif Display',serif;}
+.footer-tagline strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:600;color:rgba(255,255,255,0.6);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-links{display:flex;gap:2rem;list-style:none;}
+.footer-links a{font-size:0.68rem;letter-spacing:0.12em;text-transform:lowercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange);}
+footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}
+
+@media(max-width:860px){
+  nav{grid-template-columns:1fr auto;padding:0 1.5rem;} .nav-left{display:none;} .nav-logo{text-align:left;}
+  .container{padding:0 1.5rem;}
+  .profile-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .stats-row{grid-template-columns:repeat(3,1fr);}
+  .footer-top{grid-template-columns:1fr 1fr;} .footer-logo-img{display:none;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-left">
+    <li><a href="index.html">home</a></li>
+    <li><a href="o-mne.html" class="active">about</a></li>
+    <li><a href="treninky.html">training</a></li>
+    <li><a href="kempy.html">camps</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo white.png" alt="Let's Beach" class="nav-logo-img">
+      <span class="nav-logo-name">Let's Beach</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="akce.html">events</a>
+    <a href="merch.html">merch</a>
+    <a href="kontakt.html">contact</a>
+    <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="label">coach · player · enthusiast</span>
+    <h1>Filip <em>Rieger</em></h1>
+  </div>
+</div>
+
+<section class="profile-section">
+  <div class="container">
+    <div class="profile-grid">
+
+      <div class="reveal">
+        <img class="main" src="post_001_DAV5zhNITcE.jpg" alt="Filip Rieger">
+        <div class="profile-circle-wrap">
+          <div class="profile-circle">
+            <img src="profile-pic.jpg" alt="Filip Rieger">
+          </div>
+          <div class="profile-circle-caption">
+            Filip Rieger
+            <span>Beach volleyball coach · Prague</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-text reveal rd2">
+        <span class="label label-orange">here just for you</span>
+        <h2>About me<br><em>&amp; beach</em></h2>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">years on the sand</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">200+</div>
+            <div class="stat-label">students</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">Prague</div>
+            <div class="stat-label">home base</div>
+          </div>
+        </div>
+
+        <p class="body-text">
+          My name is Filip Rieger. I've been playing beach volleyball competitively since childhood – I grew up on the sand and now I teach others to love it too. I believe beach isn't just a sport; it's a way of life: movement, freedom, great people, and fresh air.
+        </p>
+        <p class="body-text">
+          I coach so everyone gets what they need – whether you're a complete beginner or a competitive player. What matters is movement, proper technique, and a good time. On and off the court.
+        </p>
+        <p class="body-text">
+          Every session is tailored to the individual player. There's no one-size-fits-all template – there's your path, and I'm here to help you walk it.
+        </p>
+
+        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">I want to train</a>
+
+        <div class="social-links">
+          <a href="https://instagram.com/rieger.filip" target="_blank" class="social-link">↗ @rieger.filip</a>
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="social-link">↗ @_lets_beach_</a>
+          <a href="https://lets-beach.reenio.com" target="_blank" class="social-link">↗ lets-beach.reenio.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="container">
+    <div class="philosophy-inner reveal">
+      <p class="philosophy-quote">
+        Beach has <strong>MANY</strong> benefits,<br>
+        but above all it teaches us to play<br>
+        <strong>BETTER</strong> – and live more fully.
+      </p>
+      <p class="philosophy-body">
+        Whether you arrive with zero experience or years behind you, on the sand we start fresh. Every session is an opportunity – to move better, react faster, enjoy more. That's beach. That's Let's Beach.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="footer-brand">Let's Beach</a>
+    <img src="logo white.png" alt="" class="footer-logo-img">
+    <div class="footer-tagline">play in every <strong>moment.</strong></div>
+  </div>
+  <div class="footer-bottom">
+    <ul class="footer-links">
+      <li><a href="o-mne.html">about</a></li>
+      <li><a href="treninky.html">training</a></li>
+      <li><a href="akce.html">events</a></li>
+      <li><a href="kontakt.html">contact</a></li>
+      <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
+    </ul>
+    <p>&copy; 2025 Let's Beach · Filip Rieger</p>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
