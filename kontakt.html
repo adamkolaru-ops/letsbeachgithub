@@ -6,7 +6,7 @@
 <title>Contact – Let's Beach</title>
 <link rel="icon" href="logo.jpg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" id="gfonts">
 <style>
 :root{--beige:#f0ede6;--beige2:#e8e2d8;--dark:#181610;--olive:#3a3a26;--orange:#e05c1a;--muted:#7a7060;--white:#faf9f7;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
@@ -36,58 +36,44 @@ nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-col
 .contact-main{background:var(--white);padding:6rem 0;}
 .contact-grid{display:grid;grid-template-columns:5fr 6fr;gap:6rem;align-items:start;}
 
-/* LEFT – info */
+/* LEFT – photo */
 .contact-info-photo{position:relative;margin-bottom:2.5rem;}
 .contact-info-photo img.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;}
-.contact-info-photo .circle{
-  position:absolute;bottom:-1.5rem;right:-1.5rem;
-  width:90px;height:90px;border-radius:50%;overflow:hidden;
-  border:4px solid var(--white);box-shadow:0 4px 16px rgba(0,0,0,0.12);
-}
+.contact-info-photo .circle{position:absolute;bottom:-1.5rem;right:-1.5rem;width:90px;height:90px;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:0 4px 16px rgba(0,0,0,0.12);}
 .contact-info-photo .circle img{width:100%;height:100%;object-fit:cover;}
-
 .contact-info h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:1rem;}
 .contact-info h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
 .contact-info .body-text{margin-bottom:2rem;}
 
-.contact-channels{display:flex;flex-direction:column;gap:0;}
+/* CHANNELS */
+.contact-channels{display:flex;flex-direction:column;gap:0;margin-bottom:2.5rem;}
 .channel{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(24,22,16,0.08);text-decoration:none;color:var(--dark);transition:color 0.2s,padding-left 0.2s;}
 .channel:last-child{border-bottom:none;}
 .channel:hover{color:var(--orange);padding-left:0.3rem;}
-.channel-icon{width:36px;height:36px;background:var(--beige);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;transition:background 0.2s;}
+.channel-icon{width:38px;height:38px;background:var(--beige);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.88rem;flex-shrink:0;transition:background 0.2s;}
 .channel:hover .channel-icon{background:rgba(224,92,26,0.1);}
-.channel-info{}
 .channel-type{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.15rem;}
 .channel-value{font-size:0.88rem;font-weight:500;color:inherit;}
 
-/* RIGHT – form */
-.contact-form-wrap{}
-.contact-form-wrap h3{font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;}
-.contact-form-wrap h3 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--muted);}
-.contact-form-wrap p{font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:2rem;}
-
-.field{margin-bottom:1.2rem;}
-.field label{display:block;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
-.field input,.field textarea,.field select{
-  width:100%;background:var(--beige);border:none;border-bottom:1px solid rgba(24,22,16,0.15);
-  color:var(--dark);font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:300;
-  padding:0.8rem 0;outline:none;transition:border-color 0.2s;
-  -webkit-appearance:none; border-radius:0;
-}
-.field input:focus,.field textarea:focus,.field select:focus{border-bottom-color:var(--orange);}
-.field input::placeholder,.field textarea::placeholder{color:rgba(24,22,16,0.3);}
-.field textarea{height:130px;resize:none;}
-.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7060' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.5rem center;}
-
-.submit-btn{width:100%;background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;padding:1rem;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s,transform 0.2s;text-transform:lowercase;}
-.submit-btn:hover{background:var(--orange);transform:translateY(-1px);}
+/* WHATSAPP GROUP BLOCK */
+.wa-group{background:var(--beige);padding:2rem;margin-top:0;}
+.wa-group-label{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:0.6rem;}
+.wa-group-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;}
+.wa-group-sub{font-size:0.82rem;color:var(--muted);font-weight:300;margin-bottom:1.5rem;line-height:1.6;}
+.wa-group-inner{display:flex;gap:2rem;align-items:flex-start;}
+.wa-group-qr{width:130px;height:130px;flex-shrink:0;background:var(--white);padding:8px;display:flex;align-items:center;justify-content:center;}
+.wa-group-qr img{width:100%;height:100%;display:block;}
+.wa-group-actions{display:flex;flex-direction:column;gap:0.8rem;justify-content:center;}
+.wa-group-scan{font-size:0.75rem;color:var(--muted);font-weight:300;line-height:1.5;}
+.btn-wa{display:inline-flex;align-items:center;gap:0.5rem;background:#25D366;color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.06em;padding:0.8rem 1.6rem;text-decoration:none;border-radius:2px;transition:background 0.2s;min-height:44px;}
+.btn-wa:hover{background:#1fba57;}
 
 /* REENIO CTA */
 .reenio-cta{background:var(--orange);padding:4.5rem 0;text-align:center;}
 .reenio-cta h2{font-size:clamp(2rem,5vw,4rem);font-weight:700;color:#fff;line-height:0.9;margin-bottom:0.8rem;}
 .reenio-cta h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.85em;}
 .reenio-cta p{color:rgba(255,255,255,0.6);font-size:0.88rem;font-weight:300;margin-bottom:2rem;letter-spacing:0.05em;}
-.btn-white{display:inline-block;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-white{display:inline-flex;align-items:center;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;min-height:44px;}
 .btn-white:hover{background:var(--beige);transform:translateY(-2px);}
 
 footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
@@ -104,25 +90,28 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}
-@media(max-width:860px){
-  nav{grid-template-columns:1fr auto;padding:0 1.5rem;}.nav-left{display:none;}.nav-logo{text-align:left;}
-  .container{padding:0 1.5rem;}
-  .contact-grid{grid-template-columns:1fr;gap:3rem;}
-  .contact-info-photo img.portrait{aspect-ratio:4/3;}
-  .contact-info-photo .circle{width:70px;height:70px;bottom:-1rem;right:-1rem;}
-  .footer-top{grid-template-columns:1fr 1fr;}.footer-logo-img{display:none;}
-  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
-  .footer-links{flex-wrap:wrap;justify-content:center;gap:1.2rem;}
-}
 
 /* COOKIE */
 .cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;font-size:0.78rem;color:rgba(255,255,255,0.6);border-top:1px solid rgba(255,255,255,0.08);}
 .cookie-banner a{color:var(--orange);text-decoration:none;}
 .cookie-actions{display:flex;gap:0.8rem;flex-shrink:0;}
-.cookie-accept{background:var(--orange);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;font-weight:500;letter-spacing:0.08em;transition:background 0.2s;}
+.cookie-accept{background:var(--orange);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;font-weight:500;transition:background 0.2s;}
 .cookie-accept:hover{background:#c94d10;}
-.cookie-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;transition:color 0.2s;}
-(max-width:860px){.cookie-banner{flex-direction:column;align-items:flex-start;padding:1.2rem 1.5rem;}}
+.cookie-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;}
+
+@media(max-width:860px){
+  nav{grid-template-columns:1fr auto;padding:0 1.5rem;}.nav-left{display:none;}
+  .container{padding:0 1.5rem;}
+  .contact-grid{grid-template-columns:1fr;gap:3rem;}
+  .contact-info-photo img.portrait{aspect-ratio:4/3;}
+  .contact-info-photo .circle{width:70px;height:70px;bottom:-1rem;right:-1rem;}
+  .wa-group-inner{flex-direction:column;gap:1.2rem;}
+  .wa-group-qr{width:120px;height:120px;}
+  .footer-top{grid-template-columns:1fr 1fr;}.footer-logo-img{display:none;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:1.2rem;}
+  .cookie-banner{flex-direction:column;align-items:flex-start;padding:1.2rem 1.5rem;}
+}
 </style>
 </head>
 <body>
@@ -139,8 +128,8 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 <nav>
   <ul class="nav-left">
     <li><a href="index.html">home</a></li>
-    <li><a href="o-mne.html">about</a></li>
     <li><a href="treninky.html">sessions</a></li>
+    <li><a href="o-mne.html">about</a></li>
   </ul>
   <div class="nav-logo">
     <a href="index.html">
@@ -159,7 +148,7 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   <div class="container">
     <span class="label">here for you</span>
     <h1>get in<em>touch</em></h1>
-    <p>I'll get back to you as soon as possible – or book directly on Reenio.</p>
+    <p>Reach out via WhatsApp, Instagram or email – we'll get back to you.</p>
   </div>
 </div>
 
@@ -167,15 +156,21 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   <div class="container">
     <div class="contact-grid">
 
-      <!-- LEFT -->
+      <!-- LEFT: photo -->
       <div class="reveal">
         <div class="contact-info-photo">
           <img class="portrait" src="post_001_DAV5zhNITcE.jpg" alt="Filip Rieger">
           <div class="circle"><img src="profile-pic.jpg" alt="Filip Rieger"></div>
         </div>
-        <span class="label label-orange">contact</span>
-        <h2>Filip <em>Rieger</em></h2>
-        <p class="body-text">Have a question about training, a camp, or a tournament? Drop me a message on Instagram or email. Happy to reply.</p>
+        <div class="contact-info">
+          <span class="label label-orange">contact</span>
+          <h2>Filip <em>Rieger</em></h2>
+          <p class="body-text">Have a question about training, a camp, or a tournament? Reach out on WhatsApp or Instagram – happy to reply.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: channels + WA group -->
+      <div class="reveal rd1">
 
         <div class="contact-channels">
           <a href="https://wa.me/420605477806" target="_blank" class="channel">
@@ -185,59 +180,50 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
               <span class="channel-value">+420 605 477 806</span>
             </div>
           </a>
+          <a href="mailto:filip@letsbeach.cz" class="channel">
+            <div class="channel-icon">✉</div>
+            <div class="channel-info">
+              <span class="channel-type">Email</span>
+              <span class="channel-value">filip@letsbeach.cz</span>
+            </div>
+          </a>
           <a href="https://instagram.com/rieger.filip" target="_blank" class="channel">
             <div class="channel-icon">↗</div>
             <div class="channel-info">
-              <span class="channel-type">instagram · personal</span>
+              <span class="channel-type">Instagram · personal</span>
               <span class="channel-value">@rieger.filip</span>
             </div>
           </a>
           <a href="https://instagram.com/_lets_beach_" target="_blank" class="channel">
             <div class="channel-icon">↗</div>
             <div class="channel-info">
-              <span class="channel-type">instagram · let's beach</span>
+              <span class="channel-type">Instagram · Let's Beach</span>
               <span class="channel-value">@_lets_beach_</span>
             </div>
           </a>
-          <a href="https://lets-beach.reenio.com" target="_blank" class="channel">
-            <div class="channel-icon">→</div>
-            <div class="channel-info">
-              <span class="channel-type">online booking</span>
-              <span class="channel-value">lets-beach.reenio.com</span>
-            </div>
-          </a>
         </div>
-      </div>
 
-      <!-- RIGHT – FORM -->
-      <div class="contact-form-wrap reveal rd1">
-        <h3>send a <em>message</em></h3>
-        <p>Fill in the form and I'll get back to you as soon as possible.</p>
-        <form onsubmit="handleSubmit(event)">
-          <div class="field">
-            <label>name</label>
-            <input type="text" placeholder="What do people call you?" required>
+        <!-- WHATSAPP GROUP -->
+        <div class="wa-group">
+          <span class="wa-group-label">Community</span>
+          <div class="wa-group-title">Join our WhatsApp group</div>
+          <p class="wa-group-sub">Stay updated on upcoming sessions, camps and events. Scan the QR code or tap the button below.</p>
+          <div class="wa-group-inner">
+            <div class="wa-group-qr">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=181610&bgcolor=faf9f7&data=https%3A%2F%2Fchat.whatsapp.com%2FLiw7eO87gtOKHsh1khpXaZ%3Fmode%3Dgi_t"
+                alt="QR code – WhatsApp group">
+            </div>
+            <div class="wa-group-actions">
+              <p class="wa-group-scan">Scan with your phone camera to join directly.</p>
+              <a href="https://chat.whatsapp.com/Liw7eO87gtOKHsh1khpXaZ?mode=gi_t" target="_blank" class="btn-wa">
+                💬 join group
+              </a>
+            </div>
           </div>
-          <div class="field">
-            <label>I'm interested in</label>
-            <select>
-              <option value="">— select type of training —</option>
-              <option>Individual training</option>
-              <option>Group sessions</option>
-              <option>Summer camp</option>
-              <option>Workshop</option>
-              <option>Tournament</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>message</label>
-            <textarea placeholder="Write anything – your level, questions, when you want to start…"></textarea>
-          </div>
-          <button type="submit" class="submit-btn">send message →</button>
-        </form>
-      </div>
+        </div>
 
+      </div>
     </div>
   </div>
 </section>
@@ -258,9 +244,11 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
   <div class="footer-bottom">
     <ul class="footer-links">
-      <li><a href="o-mne.html">about</a></li>
       <li><a href="treninky.html">sessions</a></li>
+      <li><a href="o-mne.html">about</a></li>
+      <li><a href="merch.html">merch</a></li>
       <li><a href="kontakt.html">contact</a></li>
+      <li><a href="privacy.html">privacy</a></li>
       <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
     </ul>
     <p>&copy; 2025 Let's Beach · Filip Rieger</p>
@@ -268,20 +256,11 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 </footer>
 
 <script>
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.submit-btn');
-  btn.textContent = 'sent ✓';
-  btn.style.background = '#3a3a26';
-  e.target.reset();
-  setTimeout(() => { btn.textContent = 'send message →'; btn.style.background = ''; }, 3000);
-}
 (function(){var c=localStorage.getItem("cookie-consent");if(c){document.getElementById("cookie-banner").style.display="none";if(c==="declined"){var g=document.getElementById("gfonts");if(g)g.remove();}}})();
 function acceptCookies(){localStorage.setItem("cookie-consent","accepted");document.getElementById("cookie-banner").style.display="none";}
 function declineCookies(){localStorage.setItem("cookie-consent","declined");var g=document.getElementById("gfonts");if(g)g.remove();document.getElementById("cookie-banner").style.display="none";}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
