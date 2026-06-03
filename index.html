@@ -91,30 +91,32 @@ h2.section-title em{font-style:italic;font-family:'DM Serif Display',serif;font-
 .about-ig{font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
 .about-ig:hover{color:var(--orange);}
 
-/* ── SOCIAL STRIPS (WA + IG) ── */
-.social-strips{background:var(--dark);}
-.social-strip{display:flex;align-items:center;justify-content:space-between;gap:3rem;padding:3.5rem 2.5rem;max-width:1160px;margin:0 auto;}
-.social-strip+.social-strip{border-top:1px solid rgba(255,255,255,0.06);}
-.strip-left{}
-.strip-label{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:0.5rem;}
-.strip-title{font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:1rem;letter-spacing:0.02em;}
-.strip-right{display:flex;align-items:center;gap:2rem;flex-shrink:0;}
-/* WA */
-.btn-wa{display:inline-flex;align-items:center;gap:0.5rem;background:#25D366;color:#fff;font-size:0.74rem;font-weight:500;letter-spacing:0.06em;padding:0.75rem 1.6rem;text-decoration:none;border-radius:2px;transition:background 0.2s;min-height:44px;}
+/* ── WA COMMUNITY ── */
+.wa-community{background:var(--beige2);padding:5.5rem 0;}
+.wa-community-inner{display:grid;grid-template-columns:1fr auto;gap:5rem;align-items:center;}
+.wa-community-label{font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:0.8rem;}
+.wa-community-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:0.6rem;}
+.wa-community-title em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
+.wa-community-sub{font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:1.8rem;max-width:420px;}
+.btn-wa{display:inline-flex;align-items:center;gap:0.5rem;background:#25D366;color:#fff;font-size:0.78rem;font-weight:500;letter-spacing:0.06em;padding:0.88rem 2rem;text-decoration:none;border-radius:2px;transition:background 0.2s;min-height:44px;}
 .btn-wa:hover{background:#1fba57;}
-.wa-qr-box{width:80px;height:80px;background:var(--white);padding:4px;flex-shrink:0;}
+.wa-qr-col{display:flex;flex-direction:column;align-items:center;gap:0.8rem;flex-shrink:0;}
+.wa-qr-box{width:160px;height:160px;background:var(--white);padding:8px;box-shadow:0 4px 20px rgba(0,0,0,0.08);}
 .wa-qr-box img{width:100%;height:100%;display:block;}
-.wa-strip-actions{display:flex;flex-direction:column;gap:0.6rem;align-items:flex-start;}
-.wa-strip-scan{font-size:0.68rem;color:rgba(255,255,255,0.3);font-weight:300;letter-spacing:0.06em;}
-/* IG */
-.ig-thumbs{display:flex;gap:3px;}
-.ig-thumb{width:72px;height:72px;overflow:hidden;flex-shrink:0;}
-.ig-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
-.ig-thumb:hover img{transform:scale(1.08);}
-.btn-ig-follow{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-size:0.74rem;font-weight:400;letter-spacing:0.06em;padding:0.75rem 1.5rem;text-decoration:none;border-radius:2px;transition:all 0.2s;min-height:44px;}
-.btn-ig-follow:hover{background:rgba(255,255,255,0.07);color:#fff;border-color:rgba(255,255,255,0.4);}
-.btn-ghost-white{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.65);font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2.2rem;text-decoration:none;border-radius:2px;transition:all 0.2s;min-height:44px;}
-.btn-ghost-white:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.45);color:#fff;}
+.wa-qr-caption{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+
+/* ── INSTAGRAM ── */
+.instagram-section{background:var(--white);padding:6rem 0;}
+.instagram-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3rem;}
+.insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.insta-item{position:relative;overflow:hidden;aspect-ratio:1;}
+.insta-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.insta-item:hover img{transform:scale(1.05);}
+.insta-item::after{content:'';position:absolute;inset:0;background:rgba(15,13,8,0);transition:background 0.3s;}
+.insta-item:hover::after{background:rgba(15,13,8,0.2);}
+.insta-footer{text-align:center;margin-top:2.5rem;}
+.btn-ghost{display:inline-flex;align-items:center;border:1px solid rgba(24,22,16,0.22);color:var(--dark);font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,color 0.2s;min-height:44px;}
+.btn-ghost:hover{background:var(--dark);color:#fff;}
 
 /* ── BOOKING ── */
 .booking{background:var(--orange);padding:5rem 0;text-align:center;}
@@ -168,10 +170,11 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   .event-row-date{display:flex;gap:0.5rem;align-items:baseline;text-align:left;}
   .event-row-date span{margin-top:0;}
   .event-row .btn-orange{align-self:flex-start;}
-  .social-strip{flex-direction:column;align-items:flex-start;gap:1.5rem;padding:2.5rem 1.5rem;}
-  .strip-right{flex-wrap:wrap;}
-  .ig-thumbs{gap:3px;}
-  .ig-thumb{width:60px;height:60px;}
+  .wa-community-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .wa-qr-col{flex-direction:row;gap:2rem;align-items:center;}
+  .wa-qr-box{width:120px;height:120px;}
+  .instagram-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+  .insta-grid{grid-template-columns:repeat(2,1fr);}
   .footer-top{grid-template-columns:1fr 1fr;}
   .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
   .footer-links{justify-content:center;gap:1.2rem;}
@@ -354,54 +357,57 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
 </section>
 
-<!-- SOCIAL STRIPS -->
-<div class="social-strips">
-
-  <!-- WhatsApp strip -->
-  <div class="social-strip reveal">
-    <div class="strip-left">
-      <span class="strip-label">community</span>
-      <div class="strip-title">Join our WhatsApp group</div>
-    </div>
-    <div class="strip-right">
-      <div class="wa-qr-box">
-        <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=181610&bgcolor=faf9f7&data=https%3A%2F%2Fchat.whatsapp.com%2FLiw7eO87gtOKHsh1khpXaZ%3Fmode%3Dgi_t"
-          alt="QR – WhatsApp group">
-      </div>
-      <div class="wa-strip-actions">
-        <span class="wa-strip-scan">scan to join</span>
+<!-- WHATSAPP COMMUNITY -->
+<section class="wa-community">
+  <div class="container">
+    <div class="wa-community-inner reveal">
+      <div>
+        <span class="wa-community-label">community</span>
+        <div class="wa-community-title">Join our<em>WhatsApp group</em></div>
+        <p class="wa-community-sub">Stay updated on upcoming sessions, camps and events. Scan the QR code or tap the button to join directly.</p>
         <a href="https://chat.whatsapp.com/Liw7eO87gtOKHsh1khpXaZ?mode=gi_t" target="_blank" class="btn-wa">💬 join group</a>
       </div>
-    </div>
-  </div>
-
-  <!-- Instagram strip -->
-  <div class="social-strip reveal">
-    <div class="strip-left">
-      <span class="strip-label">follow us</span>
-      <div class="strip-title">@_lets_beach_</div>
-    </div>
-    <div class="strip-right">
-      <div class="ig-thumbs">
-        <a href="https://instagram.com/_lets_beach_" target="_blank" class="ig-thumb">
-          <img src="post_004_C9sgjSHObgW.jpg" alt="">
-        </a>
-        <a href="https://instagram.com/_lets_beach_" target="_blank" class="ig-thumb">
-          <img src="post_004_C9sgjSHObgW_child1.jpg" alt="">
-        </a>
-        <a href="https://instagram.com/_lets_beach_" target="_blank" class="ig-thumb">
-          <img src="post_004_C9sgjSHObgW_child3.jpg" alt="">
-        </a>
-        <a href="https://instagram.com/_lets_beach_" target="_blank" class="ig-thumb">
-          <img src="post_001_DAV5zhNITcE.jpg" alt="">
-        </a>
+      <div class="wa-qr-col">
+        <div class="wa-qr-box">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=181610&bgcolor=faf9f7&data=https%3A%2F%2Fchat.whatsapp.com%2FLiw7eO87gtOKHsh1khpXaZ%3Fmode%3Dgi_t"
+            alt="QR – WhatsApp group">
+        </div>
+        <span class="wa-qr-caption">scan to join</span>
       </div>
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ig-follow">↗ follow</a>
     </div>
   </div>
+</section>
 
-</div>
+<!-- INSTAGRAM -->
+<section class="instagram-section">
+  <div class="container">
+    <div class="instagram-header reveal">
+      <div>
+        <span class="label">follow us</span>
+        <h2 class="section-title">@_lets_beach_</h2>
+      </div>
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ghost">open Instagram</a>
+    </div>
+    <div class="insta-grid reveal">
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+        <img src="post_004_C9sgjSHObgW.jpg" alt="Let's Beach">
+      </a>
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+        <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Let's Beach">
+      </a>
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+        <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Let's Beach">
+      </a>
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+        <img src="post_001_DAV5zhNITcE.jpg" alt="Let's Beach">
+      </a>
+    </div>
+    <div class="insta-footer reveal">
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ghost">→ follow @_lets_beach_</a>
+    </div>
+  </div>
+</section>
 
 <!-- BOOKING CTA -->
 <section class="booking">
@@ -505,6 +511,32 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // profile pic fallback
 const pi=document.getElementById('profileImg');
 if(pi){pi.addEventListener('error',function(){this.src='post_001_DAV5zhNITcE.jpg';},{once:true});}
+
+// ── LIVE EVENTS from /api/events ──
+(async function loadEvents(){
+  const list = document.getElementById('eventsList');
+  if(!list) return;
+  try {
+    const res = await fetch('/api/events');
+    if(!res.ok) return; // keep placeholder HTML
+    const {events} = await res.json();
+    if(!events || events.length === 0) return;
+    list.innerHTML = events.map(e => `
+      <div class="event-row">
+        <div class="event-row-date">
+          <strong>${escHtml(e.date)}</strong>
+          <span>${escHtml(e.day||'')}</span>
+        </div>
+        <div class="event-row-body">
+          <span class="event-row-tag">${escHtml(e.tag)}</span>
+          <div class="event-row-name">${escHtml(e.name)}</div>
+          <div class="event-row-meta">${escHtml(e.meta)}</div>
+        </div>
+        <a href="${escHtml(e.bookUrl)}" target="_blank" rel="noopener" class="btn-orange">book</a>
+      </div>`).join('');
+  } catch(e){ /* keep placeholder */ }
+})();
+function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 </script>
 </body>
 </html>
