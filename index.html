@@ -158,27 +158,91 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 .hero-slide.active .zoom-photo{animation:kenBurns 7s ease-out forwards;}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+/* ── HAMBURGER + OVERLAY ── */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:10px;margin-left:0.5rem;-webkit-tap-highlight-color:transparent;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:1px;transition:all 0.28s;}
+.nav-overlay{position:fixed;inset:0;z-index:200;background:var(--dark);display:flex;flex-direction:column;padding:0 1.5rem 2.5rem;opacity:0;transform:translateX(100%);transition:opacity 0.3s ease,transform 0.3s ease;pointer-events:none;}
+.nav-overlay.open{opacity:1;transform:translateX(0);pointer-events:all;}
+.nav-overlay-header{height:60px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.nav-overlay-logo{font-size:1.1rem;font-weight:600;color:#fff;text-decoration:none;letter-spacing:0.02em;}
+.nav-overlay-close{background:none;border:none;color:rgba(255,255,255,0.55);font-size:1.4rem;cursor:pointer;padding:0.5rem;line-height:1;-webkit-tap-highlight-color:transparent;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:flex-end;}
+.nav-overlay-links{list-style:none;flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;}
+.nav-overlay-links li a{display:flex;align-items:center;font-size:clamp(2.2rem,9vw,3.2rem);font-weight:700;color:#fff;text-decoration:none;padding:0.4rem 0;letter-spacing:-0.01em;text-transform:lowercase;border-bottom:1px solid rgba(255,255,255,0.05);transition:color 0.2s;}
+.nav-overlay-links li:last-child a{border-bottom:none;}
+.nav-overlay-links li a:active{color:var(--orange);}
+.nav-overlay-links li a em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);margin-left:0.3rem;}
+.nav-overlay-foot{padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);}
+.nav-overlay-cta{display:block;background:var(--orange);color:#fff;text-align:center;font-size:0.82rem;font-weight:600;letter-spacing:0.12em;padding:1rem;text-decoration:none;border-radius:2px;text-transform:lowercase;}
+
 /* ── MOBILE ── */
 @media(max-width:860px){
-  nav{padding:0 1.5rem;grid-template-columns:1fr auto;}
-  .nav-left{display:none;}
-  .container{padding:0 1.5rem;}
-  .about-grid{grid-template-columns:1fr;gap:3rem;}
-  .about-circle{width:260px;height:260px;}
-  .events-section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
-  .event-row{grid-template-columns:1fr;gap:0.8rem;padding:1.5rem;}
-  .event-row-date{display:flex;gap:0.5rem;align-items:baseline;text-align:left;}
-  .event-row-date span{margin-top:0;}
-  .event-row .btn-orange{align-self:flex-start;}
-  .wa-community-inner{grid-template-columns:1fr;gap:2.5rem;}
-  .wa-qr-col{flex-direction:row;gap:2rem;align-items:center;}
-  .wa-qr-box{width:120px;height:120px;}
-  .instagram-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+  /* nav */
+  nav{padding:0 1.2rem;grid-template-columns:1fr auto;}
+  .nav-left,.nav-right a:not(.nav-cta){display:none;}
+  .nav-hamburger{display:flex;}
+  .nav-right{gap:0.3rem;}
+
+  /* containers + sections */
+  .container{padding:0 1.2rem;}
+  .about{padding:4rem 0;}
+  .events-section{padding:4rem 0;}
+  .wa-community{padding:4rem 0;}
+  .instagram-section{padding:4rem 0;}
+  .booking{padding:3.5rem 0;}
+
+  /* hero */
+  .hero-title{font-size:clamp(3rem,13vw,5rem);}
+  .hero-sub{font-size:0.82rem;letter-spacing:0.1em;}
+  .hero-dots{bottom:1.2rem;gap:0.6rem;}
+  .hero-dot{min-width:26px;height:12px;display:flex;align-items:center;}
+  .hero-dot::after{content:'';display:block;width:100%;height:2px;background:inherit;border-radius:1px;}
+
+  /* events */
+  .events-section-header{flex-direction:column;align-items:flex-start;gap:0.6rem;margin-bottom:2rem;}
+  .events-section-header .btn-ghost{display:none;} /* only bottom btn on mobile */
+  .event-row{display:flex;flex-direction:column;padding:1.2rem 1rem;gap:0;}
+  .event-row-date{order:1;display:flex;gap:0.4rem;align-items:center;margin-bottom:0.4rem;}
+  .event-row-date strong{font-size:0.82rem;color:var(--muted);font-weight:500;}
+  .event-row-date span{font-size:0.75rem;color:var(--muted);}
+  .event-row-body{order:2;}
+  .event-row-name{font-size:0.95rem;}
+  .event-row-meta{font-size:0.75rem;}
+  .event-row .btn-orange{order:3;margin-top:0.9rem;width:100%;justify-content:center;font-size:0.78rem;}
+
+  /* about */
+  .about-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-circle{width:200px;height:200px;}
+
+  /* WA – hide QR (can't scan own phone), show button prominently */
+  .wa-community-inner{grid-template-columns:1fr;gap:1.5rem;}
+  .wa-qr-col{display:none;}
+  .wa-community-title{font-size:clamp(1.6rem,7vw,2.4rem);}
+  .wa-community-sub{max-width:100%;}
+  .btn-wa{width:100%;justify-content:center;font-size:0.82rem;padding:1rem;}
+
+  /* instagram */
+  .instagram-header{flex-direction:column;align-items:flex-start;gap:0.6rem;margin-bottom:1.5rem;}
   .insta-grid{grid-template-columns:repeat(2,1fr);}
-  .footer-top{grid-template-columns:1fr 1fr;}
+  .insta-footer .btn-ghost{width:100%;justify-content:center;}
+
+  /* booking CTA */
+  .btn-white{width:100%;justify-content:center;}
+
+  /* footer */
+  footer{padding:3rem 1.2rem 2rem;}
+  .footer-top{grid-template-columns:auto 1fr;}.footer-tagline{text-align:right;}
   .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
-  .footer-links{justify-content:center;gap:1.2rem;}
-  .cookie-banner{flex-direction:column;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;}
+  .footer-links{justify-content:center;gap:0.8rem 1.2rem;}
+
+  /* cookie */
+  .cookie-banner{flex-direction:column;align-items:flex-start;padding:1rem 1.2rem;gap:0.8rem;}
+  .cookie-actions{width:100%;gap:0.6rem;}
+  .cookie-accept,.cookie-decline{flex:1;text-align:center;min-height:44px;}
+}
+@media(max-width:420px){
+  .about-circle{width:160px;height:160px;}
+  .wa-community-inner{gap:1.2rem;}
+  .hero-title{font-size:clamp(2.8rem,14vw,4.5rem);}
 }
 </style>
 </head>
@@ -209,8 +273,29 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
     <a href="merch.html">merch</a>
     <a href="kontakt.html">contact</a>
     <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-overlay-header">
+    <a href="index.html" class="nav-overlay-logo">Let's Beach</a>
+    <button class="nav-overlay-close" id="navClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="nav-overlay-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="treninky.html">sessions</a></li>
+    <li><a href="o-mne.html">about <em>me</em></a></li>
+    <li><a href="merch.html">merch</a></li>
+    <li><a href="kontakt.html">contact</a></li>
+  </ul>
+  <div class="nav-overlay-foot">
+    <a href="https://lets-beach.reenio.com" target="_blank" class="nav-overlay-cta">book now</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -541,6 +626,20 @@ if(pi){pi.addEventListener('error',function(){this.src='post_001_DAV5zhNITcE.jpg
   } catch(e){ /* keep placeholder */ }
 })();
 function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── HAMBURGER MENU ──
+(function(){
+  const btn     = document.getElementById('navHamburger');
+  const overlay = document.getElementById('navOverlay');
+  const close   = document.getElementById('navClose');
+  if(!btn) return;
+  const open  = () => { overlay.classList.add('open'); document.body.style.overflow='hidden'; };
+  const shut  = () => { overlay.classList.remove('open'); document.body.style.overflow=''; };
+  btn.addEventListener('click', open);
+  close.addEventListener('click', shut);
+  overlay.addEventListener('click', e => { if(e.target===overlay) shut(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') shut(); });
+})();
 </script>
 </body>
 </html>
