@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – Let's Beach</title>
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" id="gfonts">
+<style>
+:root{--beige:#f0ede6;--beige2:#e8e2d8;--dark:#181610;--olive:#3a3a26;--orange:#e05c1a;--muted:#7a7060;--white:#faf9f7;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--dark);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
+.nav-left,.nav-right{display:flex;align-items:center;gap:1.8rem;list-style:none;}
+.nav-right{justify-content:flex-end;}
+.nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
+.nav-left a:hover,.nav-right a:hover{color:var(--orange);}
+.nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-img{height:26px;filter:brightness(0) invert(1);}
+.nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
+.nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
+.nav-cta:hover{background:#c94d10!important;}
+.container{max-width:760px;margin:0 auto;padding:0 2.5rem;}
+.page-hero{background:var(--dark);padding:5rem 0 4rem;text-align:center;}
+.page-hero .label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:1rem;}
+.page-hero h1{font-size:clamp(2rem,5vw,4rem);font-weight:700;color:#fff;line-height:0.95;}
+.privacy-body{background:var(--white);padding:5rem 0 6rem;}
+.privacy-body h2{font-size:1.25rem;font-weight:600;color:var(--dark);margin:2.5rem 0 0.8rem;}
+.privacy-body h2:first-child{margin-top:0;}
+.privacy-body p{font-size:0.9rem;line-height:1.85;color:var(--muted);font-weight:300;margin-bottom:1rem;}
+.privacy-body a{color:var(--orange);text-decoration:none;}
+.privacy-body ul{font-size:0.9rem;line-height:1.85;color:var(--muted);font-weight:300;padding-left:1.5rem;margin-bottom:1rem;}
+.privacy-body ul li{margin-bottom:0.4rem;}
+footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
+.footer-tagline{text-align:right;font-size:0.82rem;color:rgba(255,255,255,0.35);font-style:italic;font-family:'DM Serif Display',serif;}
+.footer-tagline strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:600;color:rgba(255,255,255,0.6);}
+.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
+.footer-brand{font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.4);text-decoration:none;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-links{display:flex;gap:2rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:0.68rem;letter-spacing:0.12em;text-transform:lowercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange);}
+footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;font-size:0.78rem;color:rgba(255,255,255,0.6);border-top:1px solid rgba(255,255,255,0.08);}
+.cookie-banner a{color:var(--orange);text-decoration:none;}
+.cookie-actions{display:flex;gap:0.8rem;flex-shrink:0;}
+.cookie-accept{background:var(--orange);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;font-weight:500;letter-spacing:0.08em;transition:background 0.2s;}
+.cookie-accept:hover{background:#c94d10;}
+.cookie-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;transition:color 0.2s;}
+@media(max-width:860px){
+  nav{grid-template-columns:1fr auto;padding:0 1.5rem;}.nav-left{display:none;}
+  .container{padding:0 1.5rem;}
+  .cookie-banner{flex-direction:column;align-items:flex-start;padding:1.2rem 1.5rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{justify-content:center;gap:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="cookie-banner" class="cookie-banner">
+  <p>We use Google Fonts for typography. By continuing you accept our <a href="privacy.html">privacy policy</a>.</p>
+  <div class="cookie-actions">
+    <button onclick="acceptCookies()" class="cookie-accept">Accept</button>
+    <button onclick="declineCookies()" class="cookie-decline">Decline</button>
+  </div>
+</div>
+
+<nav>
+  <ul class="nav-left">
+    <li><a href="index.html">home</a></li>
+    <li><a href="treninky.html">sessions</a></li>
+    <li><a href="o-mne.html">about</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo white.png" alt="Let's Beach" class="nav-logo-img">
+      <span class="nav-logo-name">Let's Beach</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="merch.html">merch</a>
+    <a href="kontakt.html">contact</a>
+    <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="label">legal</span>
+    <h1>Privacy Policy</h1>
+  </div>
+</div>
+
+<section class="privacy-body">
+  <div class="container">
+
+    <h2>Who we are</h2>
+    <p>This website is operated by <strong>Filip Rieger</strong>, trading as Let's Beach, based in the Czech Republic. You can contact us at <a href="https://wa.me/420605477806">+420 605 477 806</a> (WhatsApp) or via the <a href="kontakt.html">contact form</a>.</p>
+
+    <h2>What data we collect</h2>
+    <p>We only collect data you voluntarily provide through our contact form:</p>
+    <ul>
+      <li>Your name</li>
+      <li>The message you send us</li>
+      <li>Your interest (type of training selected)</li>
+    </ul>
+    <p>This data is used solely to respond to your enquiry and is not shared with third parties or used for marketing purposes.</p>
+
+    <h2>Google Fonts</h2>
+    <p>This website uses <strong>Google Fonts</strong>, a service provided by Google LLC. When you visit the site, your browser loads font files from Google's servers. This may result in Google recording your IP address and browser information. This is a standard technical process to deliver the fonts.</p>
+    <p>For more information, see <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>. If you decline cookies in our banner, Google Fonts will not be loaded.</p>
+
+    <h2>Cookies</h2>
+    <p>We do not use tracking or marketing cookies. We store only one item in your browser's local storage: your cookie consent preference (<code>cookie-consent</code>). This is not transmitted to any server.</p>
+
+    <h2>Booking via Reenio</h2>
+    <p>Training sessions and events are booked through <strong>Reenio</strong> (lets-beach.reenio.com), an independent third-party booking platform. Any data you provide during booking is governed by Reenio's own privacy policy.</p>
+
+    <h2>Your rights (GDPR)</h2>
+    <p>Under the General Data Protection Regulation (GDPR), you have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you</li>
+      <li>Request correction or deletion of your data</li>
+      <li>Withdraw consent at any time</li>
+    </ul>
+    <p>To exercise these rights, contact us via WhatsApp at <a href="https://wa.me/420605477806">+420 605 477 806</a> or through the <a href="kontakt.html">contact form</a>.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy occasionally. The latest version is always available on this page. Last updated: June 2025.</p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="footer-brand">Let's Beach</a>
+    <div></div>
+    <div class="footer-tagline">play in every <strong>moment.</strong></div>
+  </div>
+  <div class="footer-bottom">
+    <ul class="footer-links">
+      <li><a href="treninky.html">sessions</a></li>
+      <li><a href="o-mne.html">about</a></li>
+      <li><a href="merch.html">merch</a></li>
+      <li><a href="kontakt.html">contact</a></li>
+      <li><a href="privacy.html">privacy</a></li>
+      <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
+    </ul>
+    <p>&copy; 2025 Let's Beach · Filip Rieger</p>
+  </div>
+</footer>
+
+<script>
+(function(){var c=localStorage.getItem("cookie-consent");if(c){document.getElementById("cookie-banner").style.display="none";if(c==="declined"){var g=document.getElementById("gfonts");if(g)g.remove();}}})();
+function acceptCookies(){localStorage.setItem("cookie-consent","accepted");document.getElementById("cookie-banner").style.display="none";}
+function declineCookies(){localStorage.setItem("cookie-consent","declined");var g=document.getElementById("gfonts");if(g)g.remove();document.getElementById("cookie-banner").style.display="none";}
+</script>
+</body>
+</html>

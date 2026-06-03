@@ -114,16 +114,33 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
   .footer-links{flex-wrap:wrap;justify-content:center;gap:1.2rem;}
 }
+
+/* COOKIE */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;font-size:0.78rem;color:rgba(255,255,255,0.6);border-top:1px solid rgba(255,255,255,0.08);}
+.cookie-banner a{color:var(--orange);text-decoration:none;}
+.cookie-actions{display:flex;gap:0.8rem;flex-shrink:0;}
+.cookie-accept{background:var(--orange);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;font-weight:500;letter-spacing:0.08em;transition:background 0.2s;}
+.cookie-accept:hover{background:#c94d10;}
+.cookie-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;transition:color 0.2s;}
+(max-width:860px){.cookie-banner{flex-direction:column;align-items:flex-start;padding:1.2rem 1.5rem;}}
 </style>
 </head>
 <body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" class="cookie-banner">
+  <p>We use Google Fonts for typography. By continuing you accept our <a href="privacy.html">privacy policy</a>.</p>
+  <div class="cookie-actions">
+    <button onclick="acceptCookies()" class="cookie-accept">Accept</button>
+    <button onclick="declineCookies()" class="cookie-decline">Decline</button>
+  </div>
+</div>
 
 <nav>
   <ul class="nav-left">
     <li><a href="index.html">home</a></li>
     <li><a href="o-mne.html">about</a></li>
-    <li><a href="treninky.html">training</a></li>
-    <li><a href="kempy.html">camps</a></li>
+    <li><a href="treninky.html">sessions</a></li>
   </ul>
   <div class="nav-logo">
     <a href="index.html">
@@ -132,7 +149,6 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
     </a>
   </div>
   <div class="nav-right">
-    <a href="akce.html">events</a>
     <a href="merch.html">merch</a>
     <a href="kontakt.html" class="active">contact</a>
     <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
@@ -162,11 +178,11 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
         <p class="body-text">Have a question about training, a camp, or a tournament? Drop me a message on Instagram or email. Happy to reply.</p>
 
         <div class="contact-channels">
-          <a href="mailto:filip@letsbeach.cz" class="channel">
-            <div class="channel-icon">✉</div>
+          <a href="https://wa.me/420605477806" target="_blank" class="channel">
+            <div class="channel-icon">💬</div>
             <div class="channel-info">
-              <span class="channel-type">email</span>
-              <span class="channel-value">filip@letsbeach.cz</span>
+              <span class="channel-type">WhatsApp</span>
+              <span class="channel-value">+420 605 477 806</span>
             </div>
           </a>
           <a href="https://instagram.com/rieger.filip" target="_blank" class="channel">
@@ -201,10 +217,6 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
           <div class="field">
             <label>name</label>
             <input type="text" placeholder="What do people call you?" required>
-          </div>
-          <div class="field">
-            <label>email</label>
-            <input type="email" placeholder="your@email.com" required>
           </div>
           <div class="field">
             <label>I'm interested in</label>
@@ -247,8 +259,7 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   <div class="footer-bottom">
     <ul class="footer-links">
       <li><a href="o-mne.html">about</a></li>
-      <li><a href="treninky.html">training</a></li>
-      <li><a href="akce.html">events</a></li>
+      <li><a href="treninky.html">sessions</a></li>
       <li><a href="kontakt.html">contact</a></li>
       <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
     </ul>
@@ -268,6 +279,9 @@ function handleSubmit(e) {
   e.target.reset();
   setTimeout(() => { btn.textContent = 'send message →'; btn.style.background = ''; }, 3000);
 }
+(function(){var c=localStorage.getItem("cookie-consent");if(c){document.getElementById("cookie-banner").style.display="none";if(c==="declined"){var g=document.getElementById("gfonts");if(g)g.remove();}}})();
+function acceptCookies(){localStorage.setItem("cookie-consent","accepted");document.getElementById("cookie-banner").style.display="none";}
+function declineCookies(){localStorage.setItem("cookie-consent","declined");var g=document.getElementById("gfonts");if(g)g.remove();document.getElementById("cookie-banner").style.display="none";}
 </script>
 </body>
 </html>

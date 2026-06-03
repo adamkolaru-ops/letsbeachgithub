@@ -6,7 +6,7 @@
 <title>Let's Beach – Beach Volleyball with Filip Rieger</title>
 <link rel="icon" href="logo.jpg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" id="gfonts">
 <style>
 :root{--beige:#f0ede6;--beige2:#e8e2d8;--dark:#181610;--olive:#3a3a26;--orange:#e05c1a;--muted:#7a7060;--white:#faf9f7;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
@@ -20,7 +20,7 @@ nav.solid{background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
 .nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
 .nav-left a:hover,.nav-right a:hover,.nav-left a.active,.nav-right a.active{color:var(--orange);}
 .nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
-.nav-logo-img{height:26px;filter:brightness(0) invert(1);transition:opacity 0.2s;}
+.nav-logo-img{height:26px;filter:brightness(0) invert(1);}
 .nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
 .nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
 .nav-cta:hover{background:#c94d10!important;}
@@ -37,10 +37,10 @@ nav.solid{background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
 .hero-title{font-size:clamp(3.5rem,10vw,8rem);font-weight:700;line-height:0.88;color:#fff;letter-spacing:-0.01em;opacity:0;animation:fadeUp 0.7s 0.5s forwards;}
 .hero-title em{display:block;font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.8em;color:var(--orange);}
 .hero-sub{font-size:0.88rem;color:rgba(255,255,255,0.5);letter-spacing:0.16em;margin:1.5rem 0 2.5rem;font-weight:300;opacity:0;animation:fadeUp 0.7s 0.7s forwards;}
-.btn-hero{display:inline-block;background:var(--orange);color:#fff;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;padding:0.9rem 2.6rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;opacity:0;animation:fadeUp 0.7s 0.9s forwards;}
+.btn-hero{display:inline-block;background:var(--orange);color:#fff;font-size:0.84rem;font-weight:500;letter-spacing:0.1em;padding:1rem 2.8rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;opacity:0;animation:fadeUp 0.7s 0.9s forwards;}
 .btn-hero:hover{background:#c94d10;transform:translateY(-2px);}
 .hero-dots{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:0.5rem;}
-.hero-dot{width:26px;height:2px;background:rgba(255,255,255,0.22);cursor:pointer;transition:background 0.3s,width 0.3s;}
+.hero-dot{width:26px;height:2px;background:rgba(255,255,255,0.22);cursor:pointer;transition:background 0.3s,width 0.3s;min-height:12px;padding:5px 0;}
 .hero-dot.active{background:var(--orange);width:42px;}
 
 /* ── TICKER ── */
@@ -56,12 +56,30 @@ nav.solid{background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);}
 h2.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.05;color:var(--dark);margin-bottom:1.2rem;}
 h2.section-title em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
 .body-text{font-size:0.92rem;line-height:1.85;color:var(--muted);font-weight:300;}
-.btn-orange{display:inline-block;background:var(--orange);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.8rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-orange{display:inline-block;background:var(--orange);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.85rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;min-height:44px;display:inline-flex;align-items:center;}
 .btn-orange:hover{background:#c94d10;transform:translateY(-2px);}
-.btn-ghost{display:inline-block;border:1px solid rgba(24,22,16,0.22);color:var(--dark);font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,color 0.2s,border-color 0.2s;}
+.btn-ghost{display:inline-flex;align-items:center;border:1px solid rgba(24,22,16,0.22);color:var(--dark);font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,color 0.2s;min-height:44px;}
 .btn-ghost:hover{background:var(--dark);color:#fff;}
-.btn-ghost-white{display:inline-block;border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,border-color 0.2s;}
-.btn-ghost-white:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.6);}
+.btn-white{display:inline-flex;align-items:center;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;min-height:44px;}
+.btn-white:hover{background:var(--beige);transform:translateY(-2px);}
+
+/* ── EVENTS SECTION ── */
+.events-section{background:var(--dark);padding:6rem 0;}
+.events-section-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;}
+.events-section-header h2.section-title{color:#fff;margin-bottom:0;}
+.events-section-header .label{color:rgba(255,255,255,0.35);}
+.events-section-header .btn-ghost{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);}
+.events-section-header .btn-ghost:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.4);}
+.events-rows{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,0.04);}
+.event-row{display:grid;grid-template-columns:90px 1fr auto;gap:2rem;align-items:center;background:rgba(255,255,255,0.02);padding:1.8rem 2rem;transition:background 0.2s;}
+.event-row:hover{background:rgba(255,255,255,0.055);}
+.event-row-date{text-align:center;}
+.event-row-date strong{display:block;font-size:1rem;font-weight:700;color:#fff;line-height:1;}
+.event-row-date span{font-size:0.62rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-top:0.2rem;display:block;}
+.event-row-tag{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:0.4rem;}
+.event-row-name{font-size:1rem;font-weight:600;color:#fff;margin-bottom:0.3rem;}
+.event-row-meta{font-size:0.78rem;color:rgba(255,255,255,0.35);font-weight:300;}
+.event-row .btn-orange{font-size:0.72rem;padding:0.65rem 1.4rem;}
 
 /* ── ABOUT ── */
 .about{background:var(--white);padding:6rem 0;}
@@ -75,39 +93,8 @@ h2.section-title em{font-style:italic;font-family:'DM Serif Display',serif;font-
 .about-ig{font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
 .about-ig:hover{color:var(--orange);}
 
-/* ── SERVICES ── */
-.services-overview{background:var(--beige);padding:6rem 0;}
-.services-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(24,22,16,0.08);}
-.svc-card{background:var(--white);padding:2.8rem 2.2rem;transition:background 0.2s;}
-.svc-card:hover{background:var(--beige2);}
-.svc-num{font-size:3rem;font-weight:700;color:rgba(24,22,16,0.06);line-height:1;margin-bottom:0.8rem;}
-.svc-title{font-size:1.2rem;font-weight:600;color:var(--dark);margin-bottom:0.5rem;}
-.svc-title em{display:block;font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.88em;color:var(--muted);}
-.svc-body{font-size:0.84rem;line-height:1.75;color:var(--muted);font-weight:300;margin-bottom:1.5rem;}
-.svc-link{font-size:0.72rem;color:var(--orange);text-decoration:none;letter-spacing:0.08em;transition:letter-spacing 0.2s;}
-.svc-link:hover{letter-spacing:0.14em;}
-
-/* ── VIDEO SECTION ── */
-.video-section{position:relative;height:55vh;min-height:400px;overflow:hidden;}
-.video-section video{width:100%;height:100%;object-fit:cover;display:block;}
-.video-section::after{content:'';position:absolute;inset:0;background:rgba(15,13,8,0.45);}
-.video-caption{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;padding:3rem 2.5rem;}
-.video-caption p{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(1.5rem,3.5vw,2.5rem);color:#fff;line-height:1.2;max-width:500px;opacity:0.85;}
-
-/* ── EVENTS PREVIEW ── */
-.events-preview{background:var(--beige2);padding:6rem 0;}
-.events-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;}
-.events-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(24,22,16,0.08);}
-.event-card{background:var(--white);padding:2.2rem 2.5rem;transition:background 0.2s;}
-.event-card:hover{background:var(--beige);}
-.event-tag{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:0.8rem;}
-.event-card h3{font-size:1.15rem;font-weight:600;color:var(--dark);margin-bottom:0.5rem;}
-.event-card h3 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;}
-.event-card p{font-size:0.83rem;color:var(--muted);line-height:1.7;font-weight:300;}
-
 /* ── INSTAGRAM ── */
-.instagram-section{background:var(--white);padding:6rem 0;}
+.instagram-section{background:var(--white);padding:6rem 0;border-top:1px solid rgba(24,22,16,0.06);}
 .instagram-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3rem;}
 .insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
 .insta-item{position:relative;overflow:hidden;aspect-ratio:1;}
@@ -117,14 +104,23 @@ h2.section-title em{font-style:italic;font-family:'DM Serif Display',serif;font-
 .insta-item:hover::after{background:rgba(15,13,8,0.2);}
 .insta-footer{text-align:center;margin-top:2.5rem;}
 
+/* ── CONNECT ── */
+.connect-section{background:var(--beige2);padding:6rem 0;}
+.connect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(24,22,16,0.08);margin-top:3rem;}
+.connect-card{display:flex;align-items:center;gap:1.5rem;background:var(--white);padding:2.2rem 2rem;text-decoration:none;color:var(--dark);transition:background 0.2s,padding-left 0.2s;}
+.connect-card:hover{background:var(--beige);padding-left:2.5rem;}
+.connect-icon{width:46px;height:46px;background:var(--beige2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--dark);flex-shrink:0;transition:background 0.2s;}
+.connect-card:hover .connect-icon{background:rgba(224,92,26,0.12);}
+.connect-type{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.connect-value{font-size:0.9rem;font-weight:500;color:var(--dark);}
+.connect-arrow{margin-left:auto;font-size:1.1rem;color:var(--orange);flex-shrink:0;}
+
 /* ── BOOKING ── */
 .booking{background:var(--orange);padding:5rem 0;text-align:center;}
 .booking .label{color:rgba(255,255,255,0.5);margin-bottom:1.2rem;}
 .booking h2{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:700;color:#fff;line-height:0.9;margin-bottom:1rem;}
 .booking h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.82em;}
 .booking p{color:rgba(255,255,255,0.6);font-size:0.9rem;font-weight:300;letter-spacing:0.06em;margin-bottom:2.5rem;}
-.btn-white{display:inline-block;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;}
-.btn-white:hover{background:var(--beige);transform:translateY(-2px);}
 
 /* ── FOOTER ── */
 footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
@@ -140,6 +136,16 @@ footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
 .footer-links a:hover{color:var(--orange);}
 footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 
+/* ── COOKIE BANNER ── */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;font-size:0.78rem;color:rgba(255,255,255,0.6);border-top:1px solid rgba(255,255,255,0.08);}
+.cookie-banner a{color:var(--orange);text-decoration:none;}
+.cookie-banner a:hover{text-decoration:underline;}
+.cookie-actions{display:flex;gap:0.8rem;flex-shrink:0;}
+.cookie-accept{background:var(--orange);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;font-weight:500;letter-spacing:0.08em;min-height:38px;transition:background 0.2s;}
+.cookie-accept:hover{background:#c94d10;}
+.cookie-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;min-height:38px;transition:color 0.2s,border-color 0.2s;}
+.cookie-decline:hover{color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.3);}
+
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
@@ -149,31 +155,44 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 .hero-slide.active .zoom-photo{animation:kenBurns 7s ease-out forwards;}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+/* ── MOBILE ── */
 @media(max-width:860px){
   nav{padding:0 1.5rem;grid-template-columns:1fr auto;}
-  .nav-left{display:none;}.nav-right .nav-left-only{display:none;}
+  .nav-left{display:none;}
   .container{padding:0 1.5rem;}
   .about-grid{grid-template-columns:1fr;gap:3rem;}
   .about-circle{width:260px;height:260px;}
-  .services-grid{grid-template-columns:1fr;}
-  .services-header,.events-header,.instagram-header{flex-direction:column;align-items:flex-start;gap:1rem;}
-  .events-grid-2{grid-template-columns:1fr;}
+  .instagram-header{flex-direction:column;align-items:flex-start;gap:1rem;}
   .insta-grid{grid-template-columns:repeat(2,1fr);}
+  .events-section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+  .event-row{grid-template-columns:1fr;gap:0.8rem;padding:1.5rem;}
+  .event-row-date{display:flex;gap:0.5rem;align-items:baseline;text-align:left;}
+  .event-row-date span{margin-top:0;}
+  .event-row .btn-orange{align-self:flex-start;}
+  .connect-grid{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr 1fr;}
   .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
   .footer-links{justify-content:center;gap:1.2rem;}
-  .video-section{height:40vh;}
+  .cookie-banner{flex-direction:column;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;}
 }
 </style>
 </head>
 <body>
 
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" class="cookie-banner">
+  <p>We use Google Fonts for typography. By continuing you accept our <a href="privacy.html">privacy policy</a>.</p>
+  <div class="cookie-actions">
+    <button onclick="acceptCookies()" class="cookie-accept">Accept</button>
+    <button onclick="declineCookies()" class="cookie-decline">Decline</button>
+  </div>
+</div>
+
 <nav id="navbar">
   <ul class="nav-left">
     <li><a href="index.html" class="active">home</a></li>
+    <li><a href="treninky.html">sessions</a></li>
     <li><a href="o-mne.html">about</a></li>
-    <li><a href="treninky.html">training</a></li>
-    <li><a href="kempy.html">camps</a></li>
   </ul>
   <div class="nav-logo">
     <a href="index.html">
@@ -182,7 +201,6 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
     </a>
   </div>
   <div class="nav-right">
-    <a href="akce.html">events</a>
     <a href="merch.html">merch</a>
     <a href="kontakt.html">contact</a>
     <a href="https://lets-beach.reenio.com" target="_blank" class="nav-cta">book now</a>
@@ -192,23 +210,23 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-slides" id="heroSlides">
-    <!-- 1: video -->
-    <div class="hero-slide active">
+    <!-- 1: video (fallback: zoom photo) -->
+    <div class="hero-slide active" data-fallback="post_004_C9sgjSHObgW.jpg">
       <video autoplay muted loop playsinline>
         <source src="post_004_C9sgjSHObgW_child0.mp4" type="video/mp4">
       </video>
     </div>
-    <!-- 2: foto (zoom) -->
+    <!-- 2: photo zoom -->
     <div class="hero-slide">
       <img src="post_004_C9sgjSHObgW.jpg" alt="" class="zoom-photo">
     </div>
-    <!-- 3: video -->
-    <div class="hero-slide">
+    <!-- 3: video (fallback: zoom photo) -->
+    <div class="hero-slide" data-fallback="post_004_C9sgjSHObgW.jpg">
       <video muted loop playsinline>
         <source src="post_004_C9sgjSHObgW_child7.mp4" type="video/mp4">
       </video>
     </div>
-    <!-- 4: foto (zoom) -->
+    <!-- 4: photo zoom -->
     <div class="hero-slide">
       <img src="post_004_C9sgjSHObgW.jpg" alt="" class="zoom-photo">
     </div>
@@ -249,6 +267,67 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
 </div>
 
+<!-- EVENTS -->
+<!-- TODO: replace static rows with Reenio API data from /api/events once API key is set -->
+<section class="events-section">
+  <div class="container">
+    <div class="events-section-header reveal">
+      <div>
+        <span class="label">upcoming</span>
+        <h2 class="section-title">events &amp;<em>sessions</em></h2>
+      </div>
+      <a href="treninky.html" class="btn-ghost">see all</a>
+    </div>
+    <div class="events-rows" id="eventsList">
+      <div class="event-row reveal">
+        <div class="event-row-date"><strong>Daily</strong><span>Mon – Sat</span></div>
+        <div class="event-row-body">
+          <span class="event-row-tag">Group · Prague</span>
+          <div class="event-row-name">Wake up and Let's Beach</div>
+          <div class="event-row-meta">7:00 – 8:30 AM &nbsp;·&nbsp; CZK 240 &nbsp;·&nbsp; 8 spots</div>
+        </div>
+        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">book</a>
+      </div>
+      <div class="event-row reveal">
+        <div class="event-row-date"><strong>7 Jun</strong><span>Sunday</span></div>
+        <div class="event-row-body">
+          <span class="event-row-tag">Tournament · Prague</span>
+          <div class="event-row-name">Baden Baden Štvanice</div>
+          <div class="event-row-meta">10:00 AM – 12:00 PM &nbsp;·&nbsp; 8 spots</div>
+        </div>
+        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">book</a>
+      </div>
+      <div class="event-row reveal">
+        <div class="event-row-date"><strong>Summer</strong><span>2025</span></div>
+        <div class="event-row-body">
+          <span class="event-row-tag">Camp · Prague</span>
+          <div class="event-row-name">Summer Beach Camp</div>
+          <div class="event-row-meta">5–7 days &nbsp;·&nbsp; max. 8 players</div>
+        </div>
+        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">book</a>
+      </div>
+      <div class="event-row reveal">
+        <div class="event-row-date"><strong>2025</strong><span>Prague</span></div>
+        <div class="event-row-body">
+          <span class="event-row-tag">Trip · Sea</span>
+          <div class="event-row-name">Surf &amp; Beach Trip</div>
+          <div class="event-row-meta">7–10 days &nbsp;·&nbsp; small group</div>
+        </div>
+        <a href="kontakt.html" class="btn-orange">enquire</a>
+      </div>
+      <div class="event-row reveal">
+        <div class="event-row-date"><strong>Weekend</strong><span>workshops</span></div>
+        <div class="event-row-body">
+          <span class="event-row-tag">Workshop · Prague</span>
+          <div class="event-row-name">Beach Weekend Workshop</div>
+          <div class="event-row-meta">Sat + Sun &nbsp;·&nbsp; max. 6 players</div>
+        </div>
+        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">book</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="about">
   <div class="container">
@@ -273,75 +352,6 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services-overview">
-  <div class="container">
-    <div class="services-header reveal">
-      <div>
-        <span class="label">what I offer</span>
-        <h2 class="section-title">training<br><em>for everyone</em></h2>
-      </div>
-      <a href="treninky.html" class="btn-ghost reveal rd2">all training options</a>
-    </div>
-    <div class="services-grid">
-      <div class="svc-card reveal">
-        <div class="svc-num">01</div>
-        <div class="svc-title">individual<em>training</em></div>
-        <p class="svc-body">Tailored coaching – we focus on exactly what you need. Perfect for rapid progress.</p>
-        <a href="treninky.html#individualni" class="svc-link">→ learn more</a>
-      </div>
-      <div class="svc-card reveal rd1">
-        <div class="svc-num">02</div>
-        <div class="svc-title">group<em>sessions</em></div>
-        <p class="svc-body">Maximum 6 players, so everyone gets personal attention. Great crew and beach vibes.</p>
-        <a href="treninky.html#skupinove" class="svc-link">→ learn more</a>
-      </div>
-      <div class="svc-card reveal rd2">
-        <div class="svc-num">03</div>
-        <div class="svc-title">camps &amp;<em>workshops</em></div>
-        <p class="svc-body">Weekend and week-long camps for intensive development. Technique, tactics, team – all with Filip.</p>
-        <a href="kempy.html" class="svc-link">→ learn more</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VIDEO BREAK -->
-<div class="video-section">
-  <video autoplay muted loop playsinline>
-    <source src="videos/post_003_C9soE0pOgXj.mp4" type="video/mp4">
-    <source src="videos/post_004_C9sgjSHObgW_child4.mp4" type="video/mp4">
-  </video>
-  <div class="video-caption">
-    <p>come give it a try with us.</p>
-  </div>
-</div>
-
-<!-- EVENTS PREVIEW -->
-<section class="events-preview">
-  <div class="container">
-    <div class="events-header reveal">
-      <div>
-        <span class="label">events &amp; dates</span>
-        <h2 class="section-title">camps, tournaments<br><em>&amp; more</em></h2>
-      </div>
-      <a href="akce.html" class="btn-ghost reveal rd2">all events</a>
-    </div>
-    <div class="events-grid-2">
-      <div class="event-card reveal">
-        <span class="event-tag">Summer 2025 · Camp</span>
-        <h3>Summer beach <em>camp</em></h3>
-        <p>Week-long intensive camp for all levels on the Prague sand courts.</p>
-      </div>
-      <div class="event-card reveal rd1">
-        <span class="event-tag">Surf &amp; Beach</span>
-        <h3>Surf &amp; Beach <em>camp</em></h3>
-        <p>A mix of surfing and beach volleyball. Sea, sand, sport, and great company.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- INSTAGRAM -->
 <section class="instagram-section">
   <div class="container">
@@ -354,16 +364,16 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
     </div>
     <div class="insta-grid reveal">
       <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_004_C9sgjSHObgW.jpg" alt="Let's Beach Instagram">
+        <img src="post_004_C9sgjSHObgW.jpg" alt="Let's Beach">
       </a>
       <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Let's Beach Instagram">
+        <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Let's Beach">
       </a>
       <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Let's Beach Instagram">
+        <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Let's Beach">
       </a>
       <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_001_DAV5zhNITcE.jpg" alt="Let's Beach Instagram">
+        <img src="post_001_DAV5zhNITcE.jpg" alt="Let's Beach">
       </a>
     </div>
     <div class="insta-footer reveal">
@@ -372,7 +382,43 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
 </section>
 
-<!-- BOOKING -->
+<!-- CONNECT -->
+<section class="connect-section">
+  <div class="container">
+    <div class="reveal">
+      <span class="label label-orange">get in touch</span>
+      <h2 class="section-title">reach<em>us</em></h2>
+    </div>
+    <div class="connect-grid reveal">
+      <a href="https://wa.me/420605477806" target="_blank" class="connect-card">
+        <div class="connect-icon">WA</div>
+        <div>
+          <div class="connect-type">WhatsApp</div>
+          <div class="connect-value">+420 605 477 806</div>
+        </div>
+        <span class="connect-arrow">↗</span>
+      </a>
+      <a href="https://instagram.com/_lets_beach_" target="_blank" class="connect-card">
+        <div class="connect-icon">IG</div>
+        <div>
+          <div class="connect-type">Instagram</div>
+          <div class="connect-value">@_lets_beach_</div>
+        </div>
+        <span class="connect-arrow">↗</span>
+      </a>
+      <a href="kontakt.html" class="connect-card">
+        <div class="connect-icon">✉</div>
+        <div>
+          <div class="connect-type">Contact form</div>
+          <div class="connect-value">Send a message</div>
+        </div>
+        <span class="connect-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING CTA -->
 <section class="booking">
   <div class="container">
     <span class="label">ready?</span>
@@ -394,12 +440,11 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
   <div class="footer-bottom">
     <ul class="footer-links">
+      <li><a href="treninky.html">sessions</a></li>
       <li><a href="o-mne.html">about</a></li>
-      <li><a href="treninky.html">training</a></li>
-      <li><a href="kempy.html">camps</a></li>
-      <li><a href="akce.html">events</a></li>
       <li><a href="merch.html">merch</a></li>
       <li><a href="kontakt.html">contact</a></li>
+      <li><a href="privacy.html">privacy</a></li>
       <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
     </ul>
     <p>&copy; 2025 Let's Beach · Filip Rieger</p>
@@ -407,16 +452,56 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 </footer>
 
 <script>
+// ── COOKIE CONSENT ──
+(function(){
+  var consent = localStorage.getItem('cookie-consent');
+  if(consent){
+    document.getElementById('cookie-banner').style.display='none';
+    if(consent==='declined'){
+      var gf=document.getElementById('gfonts');
+      if(gf) gf.remove();
+    }
+  }
+})();
+function acceptCookies(){
+  localStorage.setItem('cookie-consent','accepted');
+  document.getElementById('cookie-banner').style.display='none';
+}
+function declineCookies(){
+  localStorage.setItem('cookie-consent','declined');
+  var gf=document.getElementById('gfonts');
+  if(gf) gf.remove();
+  document.getElementById('cookie-banner').style.display='none';
+}
+
+// ── VIDEO FALLBACK (slow connection → photo) ──
+(function(){
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var slowConn = conn && (conn.saveData || ['slow-2g','2g'].includes(conn.effectiveType));
+  if(slowConn){
+    document.querySelectorAll('.hero-slide[data-fallback]').forEach(function(slide){
+      var fb = slide.getAttribute('data-fallback');
+      var img = document.createElement('img');
+      img.src = fb;
+      img.className = 'zoom-photo';
+      var vid = slide.querySelector('video');
+      if(vid) slide.replaceChild(img, vid);
+    });
+  }
+})();
+
+// ── NAV ──
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar.classList.toggle('solid',window.scrollY>60));
 
+// ── CAROUSEL ──
 let cur=0;
 const slides=document.querySelectorAll('.hero-slide');
 const dots=document.querySelectorAll('.hero-dot');
 function goSlide(n){
   slides[cur].classList.remove('active');dots[cur].classList.remove('active');
   const oldVid=slides[cur].querySelector('video');
-  if(oldVid)oldVid.pause();
+  if(oldVid) oldVid.pause();
   cur=n;
   slides[cur].classList.add('active');dots[cur].classList.add('active');
   const newVid=slides[cur].querySelector('video');
@@ -426,12 +511,13 @@ function goSlide(n){
 }
 setInterval(()=>goSlide((cur+1)%slides.length),6000);
 
+// ── REVEAL ──
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// fallback if profile-pic too small
+// profile pic fallback
 const pi=document.getElementById('profileImg');
 if(pi){pi.addEventListener('error',function(){this.src='post_001_DAV5zhNITcE.jpg';},{once:true});}
 </script>
