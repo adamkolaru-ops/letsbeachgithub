@@ -41,6 +41,9 @@ nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-col
 .contact-info-photo img.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;}
 .contact-info-photo .circle{position:absolute;bottom:-1.5rem;right:-1.5rem;width:90px;height:90px;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:0 4px 16px rgba(0,0,0,0.12);}
 .contact-info-photo .circle img{width:100%;height:100%;object-fit:cover;}
+.contact-header{}
+.contact-info-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:0;}
+.contact-info-title em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
 .contact-info h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:1rem;}
 .contact-info h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);}
 .contact-info .body-text{margin-bottom:2rem;}
@@ -200,15 +203,18 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 
 <section class="contact-main">
   <div class="container">
+
+    <!-- Header: full width above the grid -->
+    <div class="contact-header reveal" style="margin-bottom:3rem;">
+      <span class="label label-orange">contact</span>
+      <h2 class="contact-info-title">Filip <em>Rieger</em></h2>
+      <p class="body-text" style="max-width:520px;margin-top:0.6rem;">Have a question about training, a camp, or a tournament? Reach out on WhatsApp or Instagram – happy to reply.</p>
+    </div>
+
     <div class="contact-grid">
 
-      <!-- LEFT: info first, then photo -->
+      <!-- LEFT: photo only -->
       <div class="reveal">
-        <div class="contact-info" style="margin-bottom:2rem;">
-          <span class="label label-orange">contact</span>
-          <h2>Filip <em>Rieger</em></h2>
-          <p class="body-text">Have a question about training, a camp, or a tournament? Reach out on WhatsApp or Instagram – happy to reply.</p>
-        </div>
         <div class="contact-info-photo">
           <img class="portrait" src="post_001_DAV5zhNITcE.jpg" alt="Filip Rieger">
           <div class="circle"><img src="profile-pic.jpg" alt="Filip Rieger"></div>
