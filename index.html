@@ -93,27 +93,35 @@ h2.section-title em{font-style:italic;font-family:'DM Serif Display',serif;font-
 .about-ig{font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
 .about-ig:hover{color:var(--orange);}
 
-/* ── INSTAGRAM ── */
-.instagram-section{background:var(--white);padding:6rem 0;border-top:1px solid rgba(24,22,16,0.06);}
-.instagram-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3rem;}
-.insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+/* ── SOCIAL SECTION ── */
+.social-section{background:var(--dark);padding:6rem 0;}
+.social-section-header{margin-bottom:3rem;}
+.social-section-header .label{color:rgba(255,255,255,0.35);}
+.social-section-header h2.section-title{color:#fff;margin-bottom:0;}
+.social-grid{display:grid;grid-template-columns:6fr 4fr;gap:4rem;align-items:start;}
+.insta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
 .insta-item{position:relative;overflow:hidden;aspect-ratio:1;}
 .insta-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
 .insta-item:hover img{transform:scale(1.05);}
 .insta-item::after{content:'';position:absolute;inset:0;background:rgba(15,13,8,0);transition:background 0.3s;}
-.insta-item:hover::after{background:rgba(15,13,8,0.2);}
-.insta-footer{text-align:center;margin-top:2.5rem;}
-
-/* ── CONNECT ── */
-.connect-section{background:var(--beige2);padding:6rem 0;}
-.connect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(24,22,16,0.08);margin-top:3rem;}
-.connect-card{display:flex;align-items:center;gap:1.5rem;background:var(--white);padding:2.2rem 2rem;text-decoration:none;color:var(--dark);transition:background 0.2s,padding-left 0.2s;}
-.connect-card:hover{background:var(--beige);padding-left:2.5rem;}
-.connect-icon{width:46px;height:46px;background:var(--beige2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;letter-spacing:0.04em;color:var(--dark);flex-shrink:0;transition:background 0.2s;}
-.connect-card:hover .connect-icon{background:rgba(224,92,26,0.12);}
-.connect-type{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
-.connect-value{font-size:0.9rem;font-weight:500;color:var(--dark);}
-.connect-arrow{margin-left:auto;font-size:1.1rem;color:var(--orange);flex-shrink:0;}
+.insta-item:hover::after{background:rgba(15,13,8,0.25);}
+.insta-follow{margin-top:1.2rem;}
+.btn-ghost-white{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.65);font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.78rem 2rem;text-decoration:none;border-radius:2px;transition:all 0.2s;min-height:44px;}
+.btn-ghost-white:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.45);color:#fff;}
+.social-contact-col{display:flex;flex-direction:column;gap:1.2rem;}
+.contact-card{background:rgba(255,255,255,0.04);padding:1.8rem;border:1px solid rgba(255,255,255,0.06);}
+.contact-card-label{font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:0.5rem;}
+.contact-card-title{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:1.2rem;}
+.wa-qr-wrap{display:flex;gap:1.2rem;align-items:flex-start;}
+.wa-qr-img{width:88px;height:88px;background:var(--white);padding:5px;flex-shrink:0;}
+.wa-qr-img img{width:100%;height:100%;display:block;}
+.wa-qr-info{display:flex;flex-direction:column;gap:0.6rem;justify-content:center;}
+.wa-number{font-size:0.82rem;color:rgba(255,255,255,0.5);font-weight:300;}
+.btn-wa{display:inline-flex;align-items:center;gap:0.4rem;background:#25D366;color:#fff;font-size:0.74rem;font-weight:500;padding:0.65rem 1.3rem;text-decoration:none;border-radius:2px;transition:background 0.2s;min-height:40px;}
+.btn-wa:hover{background:#1fba57;}
+.ig-handle{font-size:0.9rem;color:rgba(255,255,255,0.65);font-weight:400;margin-bottom:0.8rem;letter-spacing:0.04em;}
+.btn-ig{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.08);color:#fff;font-size:0.74rem;font-weight:500;padding:0.65rem 1.3rem;text-decoration:none;border-radius:2px;transition:background 0.2s;border:1px solid rgba(255,255,255,0.15);min-height:40px;}
+.btn-ig:hover{background:rgba(255,255,255,0.15);}
 
 /* ── BOOKING ── */
 .booking{background:var(--orange);padding:5rem 0;text-align:center;}
@@ -162,14 +170,15 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   .container{padding:0 1.5rem;}
   .about-grid{grid-template-columns:1fr;gap:3rem;}
   .about-circle{width:260px;height:260px;}
-  .instagram-header{flex-direction:column;align-items:flex-start;gap:1rem;}
-  .insta-grid{grid-template-columns:repeat(2,1fr);}
   .events-section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
   .event-row{grid-template-columns:1fr;gap:0.8rem;padding:1.5rem;}
   .event-row-date{display:flex;gap:0.5rem;align-items:baseline;text-align:left;}
   .event-row-date span{margin-top:0;}
   .event-row .btn-orange{align-self:flex-start;}
-  .connect-grid{grid-template-columns:1fr;}
+  .social-grid{grid-template-columns:1fr;}
+  .insta-grid{grid-template-columns:repeat(2,1fr);}
+  .wa-qr-wrap{flex-direction:column;gap:1rem;}
+  .wa-qr-img{width:110px;height:110px;}
   .footer-top{grid-template-columns:1fr 1fr;}
   .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
   .footer-links{justify-content:center;gap:1.2rem;}
@@ -352,68 +361,65 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
   </div>
 </section>
 
-<!-- INSTAGRAM -->
-<section class="instagram-section">
+<!-- SOCIAL: Instagram + Contact -->
+<section class="social-section">
   <div class="container">
-    <div class="instagram-header reveal">
-      <div>
-        <span class="label">follow us</span>
-        <h2 class="section-title">@_lets_beach_</h2>
-      </div>
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ghost">open Instagram</a>
+    <div class="social-section-header reveal">
+      <span class="label">follow &amp; connect</span>
+      <h2 class="section-title">stay in<em>the loop</em></h2>
     </div>
-    <div class="insta-grid reveal">
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_004_C9sgjSHObgW.jpg" alt="Let's Beach">
-      </a>
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Let's Beach">
-      </a>
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Let's Beach">
-      </a>
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
-        <img src="post_001_DAV5zhNITcE.jpg" alt="Let's Beach">
-      </a>
-    </div>
-    <div class="insta-footer reveal">
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ghost">→ follow @_lets_beach_</a>
-    </div>
-  </div>
-</section>
+    <div class="social-grid">
 
-<!-- CONNECT -->
-<section class="connect-section">
-  <div class="container">
-    <div class="reveal">
-      <span class="label label-orange">get in touch</span>
-      <h2 class="section-title">reach<em>us</em></h2>
-    </div>
-    <div class="connect-grid reveal">
-      <a href="https://wa.me/420605477806" target="_blank" class="connect-card">
-        <div class="connect-icon">WA</div>
-        <div>
-          <div class="connect-type">WhatsApp</div>
-          <div class="connect-value">+420 605 477 806</div>
+      <!-- IG photos -->
+      <div class="reveal">
+        <div class="insta-grid">
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+            <img src="post_004_C9sgjSHObgW.jpg" alt="Let's Beach">
+          </a>
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+            <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Let's Beach">
+          </a>
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+            <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Let's Beach">
+          </a>
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="insta-item">
+            <img src="post_001_DAV5zhNITcE.jpg" alt="Let's Beach">
+          </a>
         </div>
-        <span class="connect-arrow">↗</span>
-      </a>
-      <a href="https://instagram.com/_lets_beach_" target="_blank" class="connect-card">
-        <div class="connect-icon">IG</div>
-        <div>
-          <div class="connect-type">Instagram</div>
-          <div class="connect-value">@_lets_beach_</div>
+        <div class="insta-follow">
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ghost-white">→ follow @_lets_beach_</a>
         </div>
-        <span class="connect-arrow">↗</span>
-      </a>
-      <a href="kontakt.html" class="connect-card">
-        <div class="connect-icon">✉</div>
-        <div>
-          <div class="connect-type">Contact form</div>
-          <div class="connect-value">Send a message</div>
+      </div>
+
+      <!-- Contact cards -->
+      <div class="social-contact-col reveal rd1">
+
+        <!-- WhatsApp -->
+        <div class="contact-card">
+          <span class="contact-card-label">WhatsApp</span>
+          <div class="contact-card-title">Chat with us</div>
+          <div class="wa-qr-wrap">
+            <div class="wa-qr-img">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=181610&bgcolor=faf9f7&data=https%3A%2F%2Fwa.me%2F420605477806"
+                alt="QR – WhatsApp">
+            </div>
+            <div class="wa-qr-info">
+              <span class="wa-number">+420 605 477 806</span>
+              <a href="https://wa.me/420605477806" target="_blank" class="btn-wa">💬 open chat</a>
+            </div>
+          </div>
         </div>
-        <span class="connect-arrow">→</span>
-      </a>
+
+        <!-- Instagram -->
+        <div class="contact-card">
+          <span class="contact-card-label">Instagram</span>
+          <div class="contact-card-title">Follow us</div>
+          <p class="ig-handle">@_lets_beach_</p>
+          <a href="https://instagram.com/_lets_beach_" target="_blank" class="btn-ig">↗ follow on Instagram</a>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
