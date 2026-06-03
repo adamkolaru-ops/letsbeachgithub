@@ -338,20 +338,20 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-slides" id="heroSlides">
-    <!-- 1: video (fallback: zoom photo) -->
+    <!-- 1: video child7 (swapped) -->
     <div class="hero-slide active" data-fallback="post_004_C9sgjSHObgW.jpg">
-      <video autoplay muted loop playsinline>
-        <source src="videos/post_004_C9sgjSHObgW_child0.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline webkit-playsinline>
+        <source src="videos/post_004_C9sgjSHObgW_child7.mp4" type="video/mp4">
       </video>
     </div>
     <!-- 2: photo zoom -->
     <div class="hero-slide">
       <img src="post_004_C9sgjSHObgW.jpg" alt="" class="zoom-photo">
     </div>
-    <!-- 3: video (fallback: zoom photo) -->
+    <!-- 3: video child0 (swapped) -->
     <div class="hero-slide" data-fallback="post_004_C9sgjSHObgW.jpg">
-      <video autoplay muted loop playsinline>
-        <source src="videos/post_004_C9sgjSHObgW_child7.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline webkit-playsinline>
+        <source src="videos/post_004_C9sgjSHObgW_child0.mp4" type="video/mp4">
       </video>
     </div>
     <!-- 4: photo zoom -->
@@ -614,6 +614,13 @@ function declineCookies(){
 let cur=0;
 const slides=document.querySelectorAll('.hero-slide');
 const dots=document.querySelectorAll('.hero-dot');
+
+function tryPlay(vid){
+  if(!vid) return;
+  vid.muted=true; // ensure muted before play (iOS requirement)
+  vid.play().catch(()=>{});
+}
+
 function goSlide(n){
   slides[cur].classList.remove('active');dots[cur].classList.remove('active');
   const oldVid=slides[cur].querySelector('video');
@@ -621,11 +628,24 @@ function goSlide(n){
   cur=n;
   slides[cur].classList.add('active');dots[cur].classList.add('active');
   const newVid=slides[cur].querySelector('video');
-  if(newVid){newVid.currentTime=0;newVid.play().catch(()=>{});}
+  if(newVid){newVid.currentTime=0;tryPlay(newVid);}
   const zp=slides[cur].querySelector('.zoom-photo');
   if(zp){zp.style.animation='none';zp.offsetHeight;zp.style.animation='';}
 }
-setInterval(()=>goSlide((cur+1)%slides.length),6000);
+
+// Try autoplay on load
+document.querySelectorAll('.hero-slide video').forEach(v=>tryPlay(v));
+
+// iOS Safari: resume play on first user touch (fixes blocked autoplay)
+document.addEventListener('touchstart', function iosUnlock(){
+  document.querySelectorAll('.hero-slide video').forEach(v=>tryPlay(v));
+  // Play only the active slide
+  const activeVid=slides[cur]?.querySelector('video');
+  if(activeVid) tryPlay(activeVid);
+  document.removeEventListener('touchstart', iosUnlock);
+}, {once:true, passive:true});
+
+setInterval(()=>goSlide((cur+1)%slides.length), 6000); // 6s per slide
 
 // ── REVEAL ──
 const obs=new IntersectionObserver(entries=>{
