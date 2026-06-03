@@ -18,7 +18,7 @@
  */
 
 const REENIO_BASE  = 'https://lets-beach.reenio.com/en/api/Term';
-const MAX_EVENTS   = 7;   // show up to 7 upcoming events
+const MAX_EVENTS   = 5;   // show up to 5 upcoming events
 const WEEKS_AHEAD  = 8;   // fetch 8 weeks of data (covers ~2 months)
 const TZ           = 'Europe/Prague';
 
