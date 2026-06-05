@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Let's Beach – Admin</title>
+<style>
+:root{--orange:#e05c1a;--dark:#181610;--panel:#22201a;--line:rgba(255,255,255,0.1);--txt:#eee;--muted:#9a9388;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#11100c;color:var(--txt);height:100vh;overflow:hidden;}
+
+/* ── LOGIN ── */
+#login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#11100c;z-index:1000;}
+.login-box{background:var(--panel);padding:2.5rem;border-radius:8px;width:320px;text-align:center;border:1px solid var(--line);}
+.login-box h1{font-size:1.2rem;margin-bottom:0.4rem;}
+.login-box p{font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem;}
+.login-box input{width:100%;padding:0.8rem;background:#11100c;border:1px solid var(--line);border-radius:4px;color:#fff;font-size:0.9rem;margin-bottom:1rem;}
+.login-box input:focus{outline:none;border-color:var(--orange);}
+.login-box button{width:100%;padding:0.8rem;background:var(--orange);color:#fff;border:none;border-radius:4px;font-size:0.9rem;font-weight:600;cursor:pointer;}
+.login-box button:hover{background:#c94d10;}
+.login-err{color:#ff6b6b;font-size:0.8rem;margin-top:0.8rem;min-height:1rem;}
+
+/* ── APP ── */
+#app{display:none;flex-direction:column;height:100vh;}
+.topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:1rem;padding:0 1.2rem;flex-shrink:0;}
+.topbar .brand{font-weight:700;font-size:0.95rem;color:var(--orange);}
+.topbar select{background:#11100c;color:#fff;border:1px solid var(--line);border-radius:4px;padding:0.5rem 0.8rem;font-size:0.85rem;cursor:pointer;}
+.topbar .spacer{flex:1;}
+.topbar .status{font-size:0.8rem;color:var(--muted);}
+.btn{padding:0.55rem 1.2rem;border-radius:4px;font-size:0.82rem;font-weight:600;cursor:pointer;border:none;}
+.btn-save{background:var(--orange);color:#fff;}
+.btn-save:hover{background:#c94d10;}
+.btn-save:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--line);}
+.btn-ghost:hover{color:#fff;}
+
+.workspace{flex:1;position:relative;background:#0a0908;overflow:hidden;}
+#frame{width:100%;height:100%;border:none;background:#fff;}
+
+/* ── FLOATING STYLE TOOLBAR ── */
+#styler{position:fixed;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0.6rem;display:none;gap:0.5rem;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,0.5);flex-wrap:wrap;max-width:340px;}
+#styler .grp{display:flex;align-items:center;gap:0.3rem;}
+#styler .lbl{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-right:0.2rem;}
+#styler button{background:#11100c;color:#fff;border:1px solid var(--line);border-radius:4px;padding:0.35rem 0.5rem;font-size:0.78rem;cursor:pointer;min-width:30px;}
+#styler button:hover{border-color:var(--orange);}
+#styler button.on{background:var(--orange);border-color:var(--orange);}
+#styler input[type=color]{width:32px;height:30px;border:1px solid var(--line);border-radius:4px;background:#11100c;cursor:pointer;padding:2px;}
+#styler .size-val{font-size:0.78rem;min-width:38px;text-align:center;color:#fff;}
+#styler .divider{width:1px;height:24px;background:var(--line);}
+
+/* ── HELP HINT ── */
+.hint{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:rgba(34,32,26,0.95);border:1px solid var(--line);border-radius:6px;padding:0.6rem 1.2rem;font-size:0.78rem;color:var(--muted);z-index:400;}
+.hint b{color:#fff;}
+
+/* ── TOAST ── */
+#toast{position:fixed;top:70px;right:1.2rem;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:6px;padding:0.8rem 1.2rem;font-size:0.84rem;z-index:600;display:none;max-width:320px;}
+#toast.ok{border-left-color:#4caf50;}
+#toast.err{border-left-color:#ff6b6b;}
+
+.saving-overlay{position:fixed;inset:0;background:rgba(10,9,8,0.7);z-index:700;display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
+.spinner{width:40px;height:40px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <h1>Let's Beach Admin</h1>
+    <p>Enter password to edit the site</p>
+    <input type="password" id="pw" placeholder="Password" autocomplete="current-password">
+    <button onclick="doLogin()">Log in</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <span class="brand">Let's Beach</span>
+    <select id="pageSelect" onchange="loadPage()">
+      <option value="index.html">Home</option>
+      <option value="treninky.html">Sessions</option>
+      <option value="o-mne.html">About</option>
+      <option value="kontakt.html">Contact</option>
+      <option value="merch.html">Merch</option>
+      <option value="privacy.html">Privacy</option>
+    </select>
+    <span class="spacer"></span>
+    <span class="status" id="status"></span>
+    <button class="btn btn-ghost" onclick="reloadPage()">Reload</button>
+    <button class="btn btn-save" id="saveBtn" onclick="savePage()">Save changes</button>
+  </div>
+  <div class="workspace">
+    <iframe id="frame"></iframe>
+  </div>
+  <div class="hint">Click any <b>text</b> to edit · select text to <b>style</b> it · hover a <b>photo/video</b> to replace</div>
+</div>
+
+<!-- FLOATING STYLE TOOLBAR -->
+<div id="styler">
+  <div class="grp">
+    <span class="lbl">Size</span>
+    <button onclick="chgSize(-1)">−</button>
+    <span class="size-val" id="sizeVal">–</span>
+    <button onclick="chgSize(1)">+</button>
+  </div>
+  <div class="divider"></div>
+  <div class="grp">
+    <span class="lbl">Weight</span>
+    <button data-w="300" onclick="setWeight(300)">L</button>
+    <button data-w="400" onclick="setWeight(400)">R</button>
+    <button data-w="600" onclick="setWeight(600)">M</button>
+    <button data-w="700" onclick="setWeight(700)">B</button>
+  </div>
+  <div class="divider"></div>
+  <div class="grp">
+    <span class="lbl">Color</span>
+    <input type="color" id="colorPick" onchange="setColor(this.value)">
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- SAVING OVERLAY -->
+<div class="saving-overlay" id="savingOverlay">
+  <div class="spinner"></div>
+  <div style="font-size:0.85rem;color:var(--muted);">Saving to GitHub…</div>
+</div>
+
+<script>
+const ORIGIN = location.origin;
+let PASSWORD = sessionStorage.getItem('lb_admin_pw') || '';
+let activeEl = null; // currently styled element
+
+// ─── LOGIN ───
+async function doLogin(){
+  const pw = document.getElementById('pw').value;
+  const err = document.getElementById('loginErr');
+  err.textContent = '';
+  try {
+    const r = await fetch('/api/auth', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({password: pw})
+    });
+    const d = await r.json();
+    if(d.ok){
+      PASSWORD = pw;
+      sessionStorage.setItem('lb_admin_pw', pw);
+      document.getElementById('login').style.display='none';
+      document.getElementById('app').style.display='flex';
+      loadPage();
+    } else {
+      err.textContent = d.error || 'Wrong password';
+    }
+  } catch(e){ err.textContent = 'Connection error'; }
+}
+document.getElementById('pw').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+
+// Auto-login if password already in session
+if(PASSWORD){
+  fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:PASSWORD})})
+    .then(r=>r.json()).then(d=>{
+      if(d.ok){
+        document.getElementById('login').style.display='none';
+        document.getElementById('app').style.display='flex';
+        loadPage();
+      }
+    }).catch(()=>{});
+}
+
+// ─── PAGE LOADING ───
+function currentPage(){ return document.getElementById('pageSelect').value; }
+
+async function loadPage(){
+  setStatus('Loading…');
+  const page = currentPage();
+  try {
+    const res = await fetch('/'+page+'?_cms='+Date.now());
+    let html = await res.text();
+    const processed = processForEdit(html);
+    const frame = document.getElementById('frame');
+    frame.onload = () => { setupEditing(frame.contentDocument); setStatus('Ready · editing '+page); };
+    frame.srcdoc = processed;
+  } catch(e){ setStatus('Load failed: '+e.message); }
+}
+function reloadPage(){ if(confirm('Reload page? Unsaved changes will be lost.')) loadPage(); }
+
+// Prepare raw HTML for editing: add <base>, disable scripts
+function processForEdit(html){
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  // base so relative assets load inside iframe
+  const base = doc.createElement('base');
+  base.setAttribute('href', ORIGIN + '/');
+  base.setAttribute('data-admin-base', '1');
+  doc.head.insertBefore(base, doc.head.firstChild);
+  // disable scripts during editing (prevent carousel/etc interfering)
+  doc.querySelectorAll('script').forEach(s=>{
+    s.setAttribute('data-admin-disabled', s.getAttribute('type')||'');
+    s.setAttribute('type', 'text/plain');
+  });
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+}
+
+// ─── EDITING SETUP (inside iframe) ───
+const EDITABLE_TAGS = ['H1','H2','H3','H4','H5','H6','P','LI','BUTTON','SPAN','A','FIGCAPTION','BLOCKQUOTE','TD','TH','LABEL','DIV'];
+
+function setupEditing(doc){
+  // make text blocks editable (skip if ancestor already editable, skip media-only)
+  doc.querySelectorAll(EDITABLE_TAGS.join(',')).forEach(el=>{
+    if(el.closest('[contenteditable="true"]')) return;
+    if(el.querySelector('img,video')) return;             // don't make media wrappers editable
+    if(!el.textContent || !el.textContent.trim()) return; // must have text
+    // for DIV, only if it directly holds text (avoid big layout divs)
+    if(el.tagName==='DIV'){
+      const directText = Array.from(el.childNodes).some(n=>n.nodeType===3 && n.textContent.trim());
+      if(!directText) return;
+    }
+    el.setAttribute('contenteditable','true');
+  });
+
+  // click → set active element for styling
+  doc.addEventListener('click', e=>{
+    const el = e.target.closest('[contenteditable="true"], a, span, h1,h2,h3,h4,h5,h6,p,li,button');
+    if(el && doc.body.contains(el)){ activeEl = e.target; showStyler(e); }
+  }, true);
+
+  // hide styler when clicking media or empty
+  doc.addEventListener('mousedown', e=>{
+    if(e.target.tagName==='IMG' || e.target.tagName==='VIDEO') hideStyler();
+  });
+
+  // media replace overlays
+  doc.querySelectorAll('img, video').forEach(m=> addMediaOverlay(doc, m));
+
+  // selection-based styler position update
+  doc.addEventListener('mouseup', e=>{
+    const sel = doc.getSelection();
+    if(sel && sel.toString().trim()){ activeEl = e.target; showStyler(e); }
+  });
+}
+
+// ─── STYLE TOOLBAR ───
+function showStyler(e){
+  if(!activeEl) return;
+  const styler = document.getElementById('styler');
+  const frameRect = document.getElementById('frame').getBoundingClientRect();
+  // position near the click, within viewport
+  let x = frameRect.left + (e.clientX||100);
+  let y = frameRect.top + (e.clientY||100) + 20;
+  styler.style.display='flex';
+  const sw = styler.offsetWidth, sh = styler.offsetHeight;
+  if(x+sw > window.innerWidth-10) x = window.innerWidth-sw-10;
+  if(y+sh > window.innerHeight-10) y = frameRect.top + (e.clientY||100) - sh - 10;
+  if(x<10) x=10; if(y<70) y=70;
+  styler.style.left = x+'px';
+  styler.style.top = y+'px';
+  syncStyler();
+}
+function hideStyler(){ document.getElementById('styler').style.display='none'; activeEl=null; }
+
+function syncStyler(){
+  if(!activeEl) return;
+  const cs = activeEl.ownerDocument.defaultView.getComputedStyle(activeEl);
+  const px = Math.round(parseFloat(cs.fontSize));
+  document.getElementById('sizeVal').textContent = px+'px';
+  const w = parseInt(cs.fontWeight)||400;
+  document.querySelectorAll('#styler button[data-w]').forEach(b=>{
+    b.classList.toggle('on', parseInt(b.dataset.w)===nearestWeight(w));
+  });
+  // color
+  const rgb = cs.color.match(/\d+/g);
+  if(rgb){ document.getElementById('colorPick').value = rgbToHex(rgb); }
+}
+function nearestWeight(w){ return [300,400,600,700].reduce((a,b)=>Math.abs(b-w)<Math.abs(a-w)?b:a); }
+function rgbToHex(rgb){ return '#'+rgb.slice(0,3).map(x=>parseInt(x).toString(16).padStart(2,'0')).join(''); }
+
+function chgSize(dir){
+  if(!activeEl) return;
+  const cs = activeEl.ownerDocument.defaultView.getComputedStyle(activeEl);
+  let px = Math.round(parseFloat(cs.fontSize));
+  px = Math.max(8, px + dir);
+  activeEl.style.fontSize = px+'px';
+  document.getElementById('sizeVal').textContent = px+'px';
+  markDirty();
+}
+function setWeight(w){
+  if(!activeEl) return;
+  activeEl.style.fontWeight = w;
+  syncStyler(); markDirty();
+}
+function setColor(hex){
+  if(!activeEl) return;
+  activeEl.style.color = hex;
+  markDirty();
+}
+
+// ─── MEDIA REPLACE ───
+function addMediaOverlay(doc, media){
+  const wrap = doc.createElement('div');
+  wrap.className = 'admin-overlay';
+  wrap.setAttribute('contenteditable','false');
+  wrap.style.cssText = 'position:absolute;z-index:9998;background:rgba(224,92,26,0.92);color:#fff;font:600 11px/1 sans-serif;padding:6px 10px;border-radius:4px;cursor:pointer;pointer-events:auto;';
+  wrap.textContent = '↑ Replace';
+  const place = ()=>{
+    const r = media.getBoundingClientRect();
+    wrap.style.left = (media.offsetLeft+8)+'px';
+    wrap.style.top  = (media.offsetTop+8)+'px';
+  };
+  // position relative to offset parent
+  if(getComputedStyle(media.parentElement).position==='static'){
+    // leave; use absolute against nearest positioned or body
+  }
+  wrap.style.position='absolute';
+  place();
+  wrap.addEventListener('click', ev=>{ ev.stopPropagation(); ev.preventDefault(); replaceMedia(media); });
+  // insert overlay as sibling
+  media.parentElement.style.position = media.parentElement.style.position || 'relative';
+  media.parentElement.appendChild(wrap);
+}
+
+function replaceMedia(media){
+  const input = document.createElement('input');
+  input.type='file';
+  input.accept = media.tagName==='VIDEO' ? 'video/*' : 'image/*';
+  input.onchange = async ()=>{
+    const file = input.files[0]; if(!file) return;
+    const isVideo = media.tagName==='VIDEO';
+    const ext = file.name.split('.').pop().toLowerCase();
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    const path = isVideo ? ('videos/'+safeName) : safeName;
+    showToast('Uploading '+file.name+'…');
+    try {
+      const b64 = await fileToBase64(file);
+      const r = await fetch('/api/upload', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+PASSWORD},
+        body: JSON.stringify({ path, contentBase64: b64 })
+      });
+      const d = await r.json();
+      if(!d.ok){ showToast('Upload failed: '+d.error,'err'); return; }
+      // swap src
+      if(isVideo){
+        const src = media.querySelector('source') || media;
+        src.setAttribute('src', d.path);
+        media.setAttribute('poster', '');
+        media.load && media.load();
+      } else {
+        media.setAttribute('src', d.path);
+      }
+      showToast('Uploaded ✓ — remember to Save','ok');
+      markDirty();
+    } catch(e){ showToast('Error: '+e.message,'err'); }
+  };
+  input.click();
+}
+function fileToBase64(file){
+  return new Promise((res,rej)=>{
+    const r = new FileReader();
+    r.onload = ()=> res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ─── SAVE ───
+let dirty = false;
+function markDirty(){ dirty=true; document.getElementById('saveBtn').textContent='Save changes •'; }
+
+async function savePage(){
+  const doc = document.getElementById('frame').contentDocument;
+  const html = serializeForSave(doc);
+  document.getElementById('savingOverlay').style.display='flex';
+  try {
+    const r = await fetch('/api/save', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+PASSWORD},
+      body: JSON.stringify({ page: currentPage(), html })
+    });
+    const d = await r.json();
+    document.getElementById('savingOverlay').style.display='none';
+    if(d.ok){
+      dirty=false;
+      document.getElementById('saveBtn').textContent='Save changes';
+      showToast('Saved ✓ '+(d.message||'')+' (commit '+(d.commit||'')+')','ok');
+    } else {
+      showToast('Save failed: '+d.error,'err');
+    }
+  } catch(e){
+    document.getElementById('savingOverlay').style.display='none';
+    showToast('Save error: '+e.message,'err');
+  }
+}
+
+// Clean the edited document back into deployable HTML
+function serializeForSave(liveDoc){
+  const clone = liveDoc.documentElement.cloneNode(true);
+  // remove base
+  clone.querySelectorAll('base[data-admin-base]').forEach(b=>b.remove());
+  // remove admin overlays
+  clone.querySelectorAll('.admin-overlay').forEach(o=>o.remove());
+  // remove contenteditable attrs + any added position:relative we forced? keep styles (harmless)
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  // re-enable scripts
+  clone.querySelectorAll('script[data-admin-disabled]').forEach(s=>{
+    const orig = s.getAttribute('data-admin-disabled');
+    if(orig) s.setAttribute('type', orig); else s.removeAttribute('type');
+    s.removeAttribute('data-admin-disabled');
+  });
+  // strip empty poster="" we may have set
+  clone.querySelectorAll('video[poster=""]').forEach(v=>v.removeAttribute('poster'));
+  return '<!DOCTYPE html>\n' + clone.outerHTML;
+}
+
+// ─── UTILS ───
+function setStatus(t){ document.getElementById('status').textContent = t; }
+let toastTimer;
+function showToast(msg, kind){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = kind||'';
+  t.style.display='block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ t.style.display='none'; }, 5000);
+}
+
+// hide styler when clicking outside frame
+document.addEventListener('mousedown', e=>{
+  if(!e.target.closest('#styler') && !e.target.closest('#frame')) hideStyler();
+});
+// warn on unload if dirty
+window.addEventListener('beforeunload', e=>{ if(dirty){ e.preventDefault(); e.returnValue=''; } });
+</script>
+</body>
+</html>
