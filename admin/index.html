@@ -178,7 +178,6 @@ if(PASSWORD){
 // ─── PAGE LOADING ───
 function currentPage(){ return document.getElementById('pageSelect').value; }
 
-let currentBlobUrl = null;
 async function loadPage(){
   setStatus('Loading…');
   const page = currentPage();
@@ -187,15 +186,22 @@ async function loadPage(){
     let html = await res.text();
     const processed = processForEdit(html);
     const frame = document.getElementById('frame');
+    // Load the REAL page first (establishes real origin → fonts load correctly),
+    // then overwrite with the edit-mode version via document.write.
+    // document.write keeps the real origin, so Google Fonts render properly.
     frame.onload = () => {
-      try { setupEditing(frame.contentDocument); setStatus('Ready · editing '+page); }
-      catch(err){ setStatus('Edit setup error: '+err.message); }
+      frame.onload = null;
+      try {
+        const d = frame.contentDocument;
+        d.open();
+        d.write(processed);
+        d.close();
+        // DOM is ready synchronously after close()
+        setupEditing(d);
+        setStatus('Ready · editing '+page);
+      } catch(err){ setStatus('Edit setup error: '+err.message); }
     };
-    // blob URL renders external fonts reliably (srcdoc has opaque-origin font issues)
-    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
-    const blob = new Blob([processed], {type:'text/html'});
-    currentBlobUrl = URL.createObjectURL(blob);
-    frame.src = currentBlobUrl;
+    frame.src = '/'+page+'?_edit='+Date.now();
   } catch(e){ setStatus('Load failed: '+e.message); }
 }
 function reloadPage(){ if(confirm('Reload page? Unsaved changes will be lost.')) loadPage(); }
@@ -203,11 +209,7 @@ function reloadPage(){ if(confirm('Reload page? Unsaved changes will be lost.'))
 // Prepare raw HTML for editing: add <base>, disable scripts, force-reveal hidden content
 function processForEdit(html){
   const doc = new DOMParser().parseFromString(html, 'text/html');
-  // base so relative assets load inside iframe
-  const base = doc.createElement('base');
-  base.setAttribute('href', ORIGIN + '/');
-  base.setAttribute('data-admin-base', '1');
-  doc.head.insertBefore(base, doc.head.firstChild);
+  // (no <base> needed: document.write keeps the real page URL, relative paths resolve to root)
   // disable scripts during editing (prevent carousel/etc interfering)
   doc.querySelectorAll('script').forEach(s=>{
     s.setAttribute('data-admin-disabled', s.getAttribute('type')||'');
