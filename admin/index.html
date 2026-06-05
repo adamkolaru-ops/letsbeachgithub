@@ -189,7 +189,7 @@ async function loadPage(){
 }
 function reloadPage(){ if(confirm('Reload page? Unsaved changes will be lost.')) loadPage(); }
 
-// Prepare raw HTML for editing: add <base>, disable scripts
+// Prepare raw HTML for editing: add <base>, disable scripts, force-reveal hidden content
 function processForEdit(html){
   const doc = new DOMParser().parseFromString(html, 'text/html');
   // base so relative assets load inside iframe
@@ -202,6 +202,21 @@ function processForEdit(html){
     s.setAttribute('data-admin-disabled', s.getAttribute('type')||'');
     s.setAttribute('type', 'text/plain');
   });
+  // CSS override: reveal-on-scroll & fade-in animations need JS which we disabled,
+  // so force everything visible for editing. Also hide cookie banner & nav overlay.
+  const style = doc.createElement('style');
+  style.setAttribute('data-admin-style','1');
+  style.textContent = `
+    .reveal{opacity:1 !important;transform:none !important;}
+    [class*="rd"]{opacity:1 !important;transform:none !important;}
+    .hero-eyebrow,.hero-title,.hero-sub,.btn-hero{opacity:1 !important;animation:none !important;}
+    #cookie-banner,.cookie-banner{display:none !important;}
+    .nav-overlay{display:none !important;}
+    [contenteditable="true"]{outline:1px dashed rgba(224,92,26,0.35);outline-offset:2px;}
+    [contenteditable="true"]:hover{outline:1px dashed rgba(224,92,26,0.8);}
+    [contenteditable="true"]:focus{outline:2px solid var(--orange,#e05c1a);background:rgba(224,92,26,0.05);}
+  `;
+  doc.head.appendChild(style);
   return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 }
 
@@ -400,6 +415,8 @@ function serializeForSave(liveDoc){
   const clone = liveDoc.documentElement.cloneNode(true);
   // remove base
   clone.querySelectorAll('base[data-admin-base]').forEach(b=>b.remove());
+  // remove admin style override
+  clone.querySelectorAll('style[data-admin-style]').forEach(s=>s.remove());
   // remove admin overlays
   clone.querySelectorAll('.admin-overlay').forEach(o=>o.remove());
   // remove contenteditable attrs + any added position:relative we forced? keep styles (harmless)
