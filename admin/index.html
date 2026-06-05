@@ -122,6 +122,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<!-- MEDIA REPLACE BUTTON (parent-side, never injected into page) -->
+<button id="mediaBtn" onclick="doReplaceMedia()" style="display:none;position:fixed;z-index:550;background:var(--orange);color:#fff;border:none;border-radius:5px;padding:0.55rem 0.9rem;font-size:0.78rem;font-weight:600;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,0.4);">↑ Replace</button>
+
 <!-- TOAST -->
 <div id="toast"></div>
 
@@ -251,13 +254,18 @@ function setupEditing(doc){
     if(el && doc.body.contains(el)){ activeEl = e.target; showStyler(e); }
   }, true);
 
-  // hide styler when clicking media or empty
-  doc.addEventListener('mousedown', e=>{
-    if(e.target.tagName==='IMG' || e.target.tagName==='VIDEO') hideStyler();
-  });
-
-  // media replace overlays
-  doc.querySelectorAll('img, video').forEach(m=> addMediaOverlay(doc, m));
+  // click on media → show "Replace" button in PARENT (no DOM injection into page)
+  // Carousel media (inside .hero) is intentionally NOT replaceable – too fragile.
+  doc.addEventListener('click', e=>{
+    const media = e.target.closest('img, video');
+    if(media && !media.closest('.hero')){
+      e.preventDefault(); e.stopPropagation();
+      hideStyler();
+      showMediaBtn(media, e);
+    } else {
+      hideMediaBtn();
+    }
+  }, true);
 
   // selection-based styler position update
   doc.addEventListener('mouseup', e=>{
@@ -265,6 +273,26 @@ function setupEditing(doc){
     if(sel && sel.toString().trim()){ activeEl = e.target; showStyler(e); }
   });
 }
+
+// ─── MEDIA REPLACE (parent-side button, no page mutation) ───
+let activeMedia = null;
+function showMediaBtn(media, e){
+  activeMedia = media;
+  const btn = document.getElementById('mediaBtn');
+  const frameRect = document.getElementById('frame').getBoundingClientRect();
+  let x = frameRect.left + (e.clientX||100);
+  let y = frameRect.top + (e.clientY||100) + 14;
+  btn.style.display='block';
+  const bw = btn.offsetWidth, bh = btn.offsetHeight;
+  if(x+bw > window.innerWidth-10) x = window.innerWidth-bw-10;
+  if(y+bh > window.innerHeight-10) y = frameRect.top + (e.clientY||100) - bh - 10;
+  if(x<10) x=10; if(y<70) y=70;
+  btn.style.left = x+'px';
+  btn.style.top = y+'px';
+  btn.textContent = (media.tagName==='VIDEO'?'↑ Replace video':'↑ Replace photo');
+}
+function hideMediaBtn(){ document.getElementById('mediaBtn').style.display='none'; activeMedia=null; }
+function doReplaceMedia(){ if(activeMedia) replaceMedia(activeMedia); }
 
 // ─── STYLE TOOLBAR ───
 function showStyler(e){
@@ -322,29 +350,6 @@ function setColor(hex){
 }
 
 // ─── MEDIA REPLACE ───
-function addMediaOverlay(doc, media){
-  const wrap = doc.createElement('div');
-  wrap.className = 'admin-overlay';
-  wrap.setAttribute('contenteditable','false');
-  wrap.style.cssText = 'position:absolute;z-index:9998;background:rgba(224,92,26,0.92);color:#fff;font:600 11px/1 sans-serif;padding:6px 10px;border-radius:4px;cursor:pointer;pointer-events:auto;';
-  wrap.textContent = '↑ Replace';
-  const place = ()=>{
-    const r = media.getBoundingClientRect();
-    wrap.style.left = (media.offsetLeft+8)+'px';
-    wrap.style.top  = (media.offsetTop+8)+'px';
-  };
-  // position relative to offset parent
-  if(getComputedStyle(media.parentElement).position==='static'){
-    // leave; use absolute against nearest positioned or body
-  }
-  wrap.style.position='absolute';
-  place();
-  wrap.addEventListener('click', ev=>{ ev.stopPropagation(); ev.preventDefault(); replaceMedia(media); });
-  // insert overlay as sibling
-  media.parentElement.style.position = media.parentElement.style.position || 'relative';
-  media.parentElement.appendChild(wrap);
-}
-
 function replaceMedia(media){
   const input = document.createElement('input');
   input.type='file';
@@ -451,9 +456,10 @@ function showToast(msg, kind){
   toastTimer = setTimeout(()=>{ t.style.display='none'; }, 5000);
 }
 
-// hide styler when clicking outside frame
+// hide styler/media button when clicking outside frame
 document.addEventListener('mousedown', e=>{
   if(!e.target.closest('#styler') && !e.target.closest('#frame')) hideStyler();
+  if(!e.target.closest('#mediaBtn') && !e.target.closest('#frame')) hideMediaBtn();
 });
 // warn on unload if dirty
 window.addEventListener('beforeunload', e=>{ if(dirty){ e.preventDefault(); e.returnValue=''; } });
