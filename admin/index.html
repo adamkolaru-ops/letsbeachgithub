@@ -175,6 +175,7 @@ if(PASSWORD){
 // ─── PAGE LOADING ───
 function currentPage(){ return document.getElementById('pageSelect').value; }
 
+let currentBlobUrl = null;
 async function loadPage(){
   setStatus('Loading…');
   const page = currentPage();
@@ -183,8 +184,15 @@ async function loadPage(){
     let html = await res.text();
     const processed = processForEdit(html);
     const frame = document.getElementById('frame');
-    frame.onload = () => { setupEditing(frame.contentDocument); setStatus('Ready · editing '+page); };
-    frame.srcdoc = processed;
+    frame.onload = () => {
+      try { setupEditing(frame.contentDocument); setStatus('Ready · editing '+page); }
+      catch(err){ setStatus('Edit setup error: '+err.message); }
+    };
+    // blob URL renders external fonts reliably (srcdoc has opaque-origin font issues)
+    if(currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+    const blob = new Blob([processed], {type:'text/html'});
+    currentBlobUrl = URL.createObjectURL(blob);
+    frame.src = currentBlobUrl;
   } catch(e){ setStatus('Load failed: '+e.message); }
 }
 function reloadPage(){ if(confirm('Reload page? Unsaved changes will be lost.')) loadPage(); }
