@@ -120,6 +120,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <span class="lbl">Color</span>
     <input type="color" id="colorPick" onchange="setColor(this.value)">
   </div>
+  <div class="divider"></div>
+  <div class="grp">
+    <span class="lbl">Opacity</span>
+    <input type="range" id="opacityRange" min="0" max="100" value="100" oninput="setOpacity(this.value)" style="width:80px;cursor:pointer;">
+    <span class="size-val" id="opacityVal">100%</span>
+  </div>
 </div>
 
 <!-- MEDIA REPLACE BUTTON (parent-side, never injected into page) -->
@@ -327,6 +333,10 @@ function syncStyler(){
   // color
   const rgb = cs.color.match(/\d+/g);
   if(rgb){ document.getElementById('colorPick').value = rgbToHex(rgb); }
+  // opacity
+  const op = Math.round((parseFloat(cs.opacity)||1)*100);
+  document.getElementById('opacityRange').value = op;
+  document.getElementById('opacityVal').textContent = op+'%';
 }
 function nearestWeight(w){ return [300,400,600,700].reduce((a,b)=>Math.abs(b-w)<Math.abs(a-w)?b:a); }
 function rgbToHex(rgb){ return '#'+rgb.slice(0,3).map(x=>parseInt(x).toString(16).padStart(2,'0')).join(''); }
@@ -348,6 +358,12 @@ function setWeight(w){
 function setColor(hex){
   if(!activeEl) return;
   activeEl.style.color = hex;
+  markDirty();
+}
+function setOpacity(val){
+  if(!activeEl) return;
+  activeEl.style.opacity = (val/100).toFixed(2);
+  document.getElementById('opacityVal').textContent = val+'%';
   markDirty();
 }
 
