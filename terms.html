@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sessions – Let's Beach</title>
+<title>Terms &amp; Conditions – Let's Beach</title>
 <link rel="icon" href="logo.jpg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" id="gfonts">
@@ -15,87 +15,47 @@ nav{position:sticky;top:0;z-index:100;height:60px;display:grid;grid-template-col
 .nav-left,.nav-right{display:flex;align-items:center;gap:1.8rem;list-style:none;}
 .nav-right{justify-content:flex-end;}
 .nav-left a,.nav-right a{font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;text-transform:lowercase;transition:color 0.2s;white-space:nowrap;}
-.nav-left a:hover,.nav-right a:hover,.nav-left a.active,.nav-right a.active{color:var(--orange);}
+.nav-left a:hover,.nav-right a:hover{color:var(--orange);}
 .nav-logo a{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
 .nav-logo-img{height:26px;filter:brightness(0) invert(1);}
 .nav-logo-name{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:0.03em;white-space:nowrap;}
 .nav-cta{background:var(--orange)!important;color:#fff!important;padding:0.55rem 1.7rem;border-radius:2px;letter-spacing:0.1em!important;font-size:0.75rem!important;}
 .nav-cta:hover{background:#c94d10!important;}
-.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
-.label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.7rem;}
-.label-orange{color:var(--orange);}
-.body-text{font-size:0.92rem;line-height:1.85;color:var(--muted);font-weight:300;}
-.btn-orange{display:inline-flex;align-items:center;background:var(--orange);color:#fff;font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.85rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;min-height:44px;}
-.btn-orange:hover{background:#c94d10;transform:translateY(-2px);}
-.btn-ghost{display:inline-flex;align-items:center;border:1px solid rgba(24,22,16,0.22);color:var(--dark);font-size:0.76rem;font-weight:500;letter-spacing:0.08em;padding:0.85rem 2.2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,color 0.2s;min-height:44px;}
-.btn-ghost:hover{background:var(--dark);color:#fff;}
-
+.container{max-width:760px;margin:0 auto;padding:0 2.5rem;}
 .page-hero{background:var(--dark);padding:5rem 0 4rem;text-align:center;}
-.page-hero .label{color:rgba(255,255,255,0.35);margin-bottom:1rem;}
-.page-hero h1{font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#fff;line-height:0.95;letter-spacing:-0.01em;}
-.page-hero h1 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;color:var(--orange);font-size:0.88em;}
-.page-hero p{font-size:0.9rem;color:rgba(255,255,255,0.45);margin-top:1.2rem;font-weight:300;letter-spacing:0.06em;}
-
-/* SERVICE BLOCKS */
-.service-section{padding:0;}
-.service-block{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;}
-.service-block.flip{direction:rtl;}
-.service-block.flip>*{direction:ltr;}
-.service-img{width:100%;height:520px;object-fit:cover;display:block;}
-.service-body-wrap{background:var(--white);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;}
-.service-num{font-size:4rem;font-weight:700;color:rgba(24,22,16,0.05);line-height:1;margin-bottom:0.5rem;}
-.service-tag{font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;display:block;}
-.service-title{font-size:1.9rem;font-weight:700;color:var(--dark);line-height:1.05;margin-bottom:0.2rem;}
-.service-title em{display:block;font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.88em;color:var(--muted);}
-.service-desc{font-size:0.9rem;line-height:1.85;color:var(--muted);font-weight:300;margin:1.3rem 0 2rem;max-width:420px;}
-.service-detail{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:2rem;}
-.service-detail-item{display:flex;align-items:center;gap:0.7rem;font-size:0.84rem;color:var(--dark);font-weight:400;}
-.service-detail-item::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0;}
-.service-block:nth-child(even) .service-body-wrap{background:var(--beige);}
-.btn-row{display:flex;gap:0.8rem;flex-wrap:wrap;}
-
-/* CTA STRIP */
-.cta-strip{background:var(--orange);padding:4.5rem 0;text-align:center;}
-.cta-strip h2{font-size:clamp(2rem,5vw,4rem);font-weight:700;color:#fff;line-height:0.9;margin-bottom:0.8rem;}
-.cta-strip h2 em{font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;font-size:0.85em;}
-.cta-strip p{color:rgba(255,255,255,0.6);font-size:0.88rem;font-weight:300;letter-spacing:0.06em;margin-bottom:2rem;}
-.btn-white{display:inline-flex;align-items:center;background:#fff;color:var(--orange);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;padding:0.85rem 2.5rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s;min-height:44px;}
-.btn-white:hover{background:var(--beige);transform:translateY(-2px);}
-
+.page-hero .label{font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:1rem;}
+.page-hero h1{font-size:clamp(2rem,5vw,4rem);font-weight:700;color:#fff;line-height:0.95;}
+.privacy-body{background:var(--white);padding:5rem 0 6rem;}
+.privacy-body h2{font-size:1.25rem;font-weight:600;color:var(--dark);margin:2.5rem 0 0.8rem;}
+.privacy-body h2:first-child{margin-top:0;}
+.privacy-body p{font-size:0.9rem;line-height:1.85;color:var(--muted);font-weight:300;margin-bottom:1rem;}
+.privacy-body a{color:var(--orange);text-decoration:none;}
+.privacy-body ul{font-size:0.9rem;line-height:1.85;color:var(--muted);font-weight:300;padding-left:1.5rem;margin-bottom:1rem;}
+.privacy-body ul li{margin-bottom:0.4rem;}
+.info-box{background:var(--beige);padding:1.5rem 1.8rem;margin-bottom:1.5rem;font-size:0.9rem;line-height:1.85;color:var(--dark);font-weight:300;}
+.info-box strong{font-weight:600;}
 footer{background:var(--olive);padding:3.5rem 2.5rem 2.5rem;}
-.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
-.footer-brand{font-size:1.25rem;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:none;}
-.footer-logo-img{width:40px;opacity:0.35;filter:brightness(0) invert(1);}
 .footer-tagline{text-align:right;font-size:0.82rem;color:rgba(255,255,255,0.35);font-style:italic;font-family:'DM Serif Display',serif;}
 .footer-tagline strong{font-style:normal;font-family:'Inter',sans-serif;font-weight:600;color:rgba(255,255,255,0.6);}
+.footer-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:3rem;}
+.footer-brand{font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.4);text-decoration:none;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;}
-.footer-links{display:flex;gap:2rem;list-style:none;}
+.footer-links{display:flex;gap:2rem;list-style:none;flex-wrap:wrap;}
 .footer-links a{font-size:0.68rem;letter-spacing:0.12em;text-transform:lowercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--orange);}
 footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}
-
-/* COOKIE */
 .cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(24,22,16,0.97);backdrop-filter:blur(14px);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;font-size:0.78rem;color:rgba(255,255,255,0.6);border-top:1px solid rgba(255,255,255,0.08);}
 .cookie-banner a{color:var(--orange);text-decoration:none;}
 .cookie-actions{display:flex;gap:0.8rem;flex-shrink:0;}
 .cookie-accept{background:var(--orange);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;font-weight:500;letter-spacing:0.08em;transition:background 0.2s;}
 .cookie-accept:hover{background:#c94d10;}
 .cookie-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:0.55rem 1.4rem;border-radius:2px;cursor:pointer;font-size:0.74rem;transition:color 0.2s;}
-
 @media(max-width:860px){
   nav{grid-template-columns:1fr auto;padding:0 1.5rem;}.nav-left{display:none;}
   .container{padding:0 1.5rem;}
-  .service-block,.service-block.flip{grid-template-columns:1fr;direction:ltr;}
-  .service-img{height:280px;}
-  .service-body-wrap{padding:3rem 1.5rem;}
-  .btn-row{flex-direction:column;}
-  .footer-top{grid-template-columns:1fr 1fr;}.footer-logo-img{display:none;}
-  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
-  .footer-links{flex-wrap:wrap;justify-content:center;gap:1.2rem;}
   .cookie-banner{flex-direction:column;align-items:flex-start;padding:1.2rem 1.5rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .footer-links{justify-content:center;gap:1.2rem;}
 }
 
 /* ── HAMBURGER + OVERLAY ── */
@@ -127,7 +87,6 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 </head>
 <body>
 
-<!-- COOKIE BANNER -->
 <div id="cookie-banner" class="cookie-banner">
   <p>We use Google Fonts for typography. By continuing you accept our <a href="privacy.html">privacy policy</a>.</p>
   <div class="cookie-actions">
@@ -139,7 +98,7 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 <nav>
   <ul class="nav-left">
     <li><a href="index.html">home</a></li>
-    <li><a href="treninky.html" class="active">sessions</a></li>
+    <li><a href="treninky.html">sessions</a></li>
     <li><a href="o-mne.html">about</a></li>
   </ul>
   <div class="nav-logo">
@@ -177,88 +136,121 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 
 <div class="page-hero">
   <div class="container">
-    <span class="label">training · camps · events</span>
-    <h1>sessions<br><em>for everyone</em></h1>
-    <p>Whether you're just starting out or playing competitively – we'll find the right fit for you.</p>
+    <span class="label">legal</span>
+    <h1>Terms &amp; Conditions</h1>
   </div>
 </div>
 
-<section class="service-section">
-
-  <!-- 01 Individual -->
-  <div class="service-block" id="individualni">
-    <img src="post_004_C9sgjSHObgW.jpg" alt="Individual training" class="service-img reveal">
-    <div class="service-body-wrap reveal rd1">
-      <div class="service-num">01</div>
-      <span class="service-tag">just you and me</span>
-      <div class="service-title">individual<em>training</em></div>
-      <p class="service-desc">Coaching tailored precisely to you. We focus on what you need – serve technique, attack, reception, or game IQ. Ideal for fast, targeted improvement.</p>
-      <div class="service-detail">
-        <div class="service-detail-item">1-on-1 with the coach</div>
-        <div class="service-detail-item">60–90 minutes</div>
-        <div class="service-detail-item">all skill levels</div>
-        <div class="service-detail-item">flexible scheduling</div>
-      </div>
-      <div class="btn-row">
-        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">book individual training</a>
-        <a href="kontakt.html" class="btn-ghost">contact Filip</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 02 Group -->
-  <div class="service-block flip" id="skupinove">
-    <img src="post_004_C9sgjSHObgW_child1.jpg" alt="Group sessions" class="service-img reveal">
-    <div class="service-body-wrap reveal rd1">
-      <div class="service-num">02</div>
-      <span class="service-tag">group energy</span>
-      <div class="service-title">group<em>sessions</em></div>
-      <p class="service-desc">Maximum 6 players – everyone gets personal attention. Great crew, healthy competition, and beach vibes. We work on technique and game situations.</p>
-      <div class="service-detail">
-        <div class="service-detail-item">max. 6 players</div>
-        <div class="service-detail-item">90 minutes</div>
-        <div class="service-detail-item">regular schedule</div>
-        <div class="service-detail-item">beginners &amp; advanced</div>
-      </div>
-      <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">group schedule</a>
-    </div>
-  </div>
-
-  <!-- 03 Camps -->
-  <div class="service-block" id="kempy">
-    <img src="post_004_C9sgjSHObgW_child3.jpg" alt="Camps and workshops" class="service-img reveal">
-    <div class="service-body-wrap reveal rd1">
-      <div class="service-num">03</div>
-      <span class="service-tag">intensive development</span>
-      <div class="service-title">camps &amp;<em>workshops</em></div>
-      <p class="service-desc">Weekend or week-long camps for a big leap forward. Technique, tactics, fitness – and above all, great company. All led by Filip.</p>
-      <div class="service-detail">
-        <div class="service-detail-item">weekend &amp; week-long formats</div>
-        <div class="service-detail-item">small groups (max. 8)</div>
-        <div class="service-detail-item">technique + tactics + play</div>
-        <div class="service-detail-item">various locations</div>
-      </div>
-      <div class="btn-row">
-        <a href="https://lets-beach.reenio.com" target="_blank" class="btn-orange">book a camp</a>
-        <a href="kontakt.html" class="btn-ghost">find out more</a>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<section class="cta-strip">
+<section class="privacy-body">
   <div class="container">
-    <h2>I want to play<br><em>beach</em></h2>
-    <p>Book your spot directly on Reenio.</p>
-    <a href="https://lets-beach.reenio.com" target="_blank" class="btn-white">go to booking</a>
+
+    <div class="info-box">
+      <strong>Filip Rieger</strong><br>
+      Business ID (IČO): 19225512<br>
+      Registered Office: K Sídlišti 287, Velká Ledhuje, 549 54 Police nad Metují, Czech Republic
+    </div>
+    <p>(hereinafter referred to as the "Organizer")</p>
+
+    <h2>1. Introduction</h2>
+    <p>These Terms and Conditions govern the rights and obligations between the Organizer and participants of sports activities, social events, trips, workshops, and other events organized by the Organizer.</p>
+    <p>By making a reservation for an event, the participant confirms that they have read, understood, and agreed to these Terms and Conditions.</p>
+
+    <h2>2. Event Reservations</h2>
+    <p>Reservations are made through the Organizer's online reservation system.</p>
+    <p>A reservation becomes binding upon confirmation of the reservation and the deduction of the required number of credits from the participant's account.</p>
+    <p>The number of available spots for each event is limited. Reservations are accepted on a first-come, first-served basis until capacity is reached.</p>
+
+    <h2>3. Credit System</h2>
+    <p>Participants may use the credit system to pay for event reservations.</p>
+    <ul>
+      <li>Credits can be purchased using the payment methods offered by the Organizer.</li>
+      <li>Credits represent a prepaid right to participate in events and do not constitute electronic money or any other regulated payment instrument.</li>
+      <li>Unused credits remain valid for 12 months from the date of purchase unless stated otherwise for a specific credit package.</li>
+      <li>Credits are non-transferable unless otherwise approved by the Organizer.</li>
+      <li>Credits are non-refundable once purchased, except where required by applicable law.</li>
+      <li>Credits have no cash value and cannot be exchanged for money.</li>
+    </ul>
+
+    <h2>4. Cancellation Policy</h2>
+    <p>Participants may cancel their reservation through the reservation system.</p>
+    <ul>
+      <li><strong>More than 24 hours</strong> before the start of the event – 100% of the credits used for the reservation will be refunded.</li>
+      <li><strong>Less than 24 hours</strong> before the start of the event – no credits will be refunded.</li>
+      <li>If a participant does not attend the event without cancelling their reservation in advance, the reservation will be considered used and no credits will be refunded.</li>
+    </ul>
+
+    <h2>5. Event Cancellation or Changes by the Organizer</h2>
+    <p>The Organizer reserves the right to modify, reschedule, or cancel an event due to circumstances including but not limited to:</p>
+    <ul>
+      <li>Adverse weather conditions;</li>
+      <li>Illness of the Organizer or event host;</li>
+      <li>Insufficient number of participants;</li>
+      <li>Safety concerns;</li>
+      <li>Force majeure or other circumstances beyond reasonable control.</li>
+    </ul>
+    <p>In the event of cancellation by the Organizer, all credits used for the reservation will be refunded to the participant's account.</p>
+    <p>The Organizer shall not be liable for any indirect or additional costs incurred by participants, including transportation, accommodation, or other related expenses.</p>
+
+    <h2>6. Rights and Obligations of Participants</h2>
+    <p>Participants agree to:</p>
+    <ul>
+      <li>Provide accurate and truthful information during registration;</li>
+      <li>Follow all instructions given by organizers, hosts, and event staff;</li>
+      <li>Respect other participants and maintain appropriate behavior;</li>
+      <li>Comply with the rules applicable to each event or activity.</li>
+    </ul>
+    <p>The Organizer reserves the right to remove any participant from an event without refund if their behavior endangers others, violates event rules, or significantly disrupts the event.</p>
+
+    <h2>7. Liability and Safety</h2>
+    <p>Participation in events is voluntary and at the participant's own risk.</p>
+    <p>Participants confirm that they are physically and medically fit to participate in the selected activities.</p>
+    <p>The Organizer shall only be liable for damages caused by intentional misconduct or gross negligence.</p>
+    <p>The Organizer is not responsible for loss, theft, or damage to participants' personal belongings.</p>
+
+    <h2>8. Photography and Marketing</h2>
+    <p>Photographs and videos may be taken during events for promotional and marketing purposes, including use on the Organizer's website, social media channels, and marketing materials.</p>
+    <p>By attending an event, participants acknowledge that such photographs and recordings may be created.</p>
+    <p>Participants who do not wish to appear in promotional materials may contact the Organizer at any time and request the removal of identifiable content where reasonably possible.</p>
+
+    <h2>9. Personal Data Protection</h2>
+    <p>The Organizer processes personal data in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR) (EU) 2016/679.</p>
+    <p>Details regarding the processing of personal data are available in the Organizer's <a href="privacy.html">Privacy Policy</a>.</p>
+
+    <h2>10. Right of Withdrawal</h2>
+    <p>In accordance with Section 1837(j) of Act No. 89/2012 Coll., the Czech Civil Code, consumers acknowledge that the right to withdraw from a contract within 14 days does not apply to leisure services if the contract provides for a specific date or period of performance.</p>
+
+    <h2>11. Consumer Dispute Resolution</h2>
+    <p>Participants who qualify as consumers under applicable law have the right to seek out-of-court dispute resolution through the competent authority in the Czech Republic.</p>
+    <p>For more information, please contact:</p>
+    <div class="info-box">
+      <strong>Czech Trade Inspection Authority (ČOI)</strong><br>
+      Štěpánská 15<br>
+      120 00 Prague 2<br>
+      Czech Republic
+    </div>
+
+    <h2>12. Governing Law and Final Provisions</h2>
+    <p>These Terms and Conditions are governed by the laws of the Czech Republic.</p>
+    <p>The Organizer reserves the right to amend these Terms and Conditions at any time. Any updated version will be published on the Organizer's website and will become effective upon publication.</p>
+    <p>These Terms and Conditions become effective on the date of their publication.</p>
+
+    <h2>Contact Information</h2>
+    <div class="info-box">
+      <strong>Filip Rieger</strong><br>
+      Business ID (IČO): 19225512<br>
+      Registered Office: K Sídlišti 287, Velká Ledhuje, 549 54 Police nad Metují, Czech Republic<br><br>
+      Email: <a href="mailto:filip.rieger@icloud.com">filip.rieger@icloud.com</a><br>
+      Phone: <a href="tel:+420605477806">+420 605 477 806</a>
+    </div>
+    <p>Effective Date: 11 June 2026<br>Last Updated: 11 June 2026</p>
+
   </div>
 </section>
 
 <footer>
   <div class="footer-top">
     <a href="index.html" class="footer-brand">Let's Beach</a>
-    <img src="logo white.png" alt="" class="footer-logo-img">
+    <div></div>
     <div class="footer-tagline">play in every <strong>moment.</strong></div>
   </div>
   <div class="footer-bottom">
@@ -271,7 +263,7 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
       <li><a href="terms.html">terms</a></li>
       <li><a href="https://instagram.com/_lets_beach_" target="_blank">instagram</a></li>
     </ul>
-    <p>&copy; 2025 Let's Beach · Filip Rieger · IČ 19225512</p>
+    <p>&copy; 2026 Let's Beach · Filip Rieger · IČ 19225512</p>
   </div>
 </footer>
 
@@ -279,8 +271,6 @@ footer p{font-size:0.66rem;color:rgba(255,255,255,0.18);}
 (function(){var c=localStorage.getItem("cookie-consent");if(c){document.getElementById("cookie-banner").style.display="none";if(c==="declined"){var g=document.getElementById("gfonts");if(g)g.remove();}}})();
 function acceptCookies(){localStorage.setItem("cookie-consent","accepted");document.getElementById("cookie-banner").style.display="none";}
 function declineCookies(){localStorage.setItem("cookie-consent","declined");var g=document.getElementById("gfonts");if(g)g.remove();document.getElementById("cookie-banner").style.display="none";}
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 (function(){
   var btn=document.getElementById("navHamburger");
