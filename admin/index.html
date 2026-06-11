@@ -39,7 +39,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 #frame{width:100%;height:100%;border:none;background:#fff;}
 
 /* ── FLOATING STYLE TOOLBAR ── */
-#styler{position:fixed;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0.6rem;display:none;gap:0.5rem;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,0.5);flex-wrap:wrap;max-width:340px;}
+#styler{position:fixed;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0.6rem;display:none;gap:0.5rem;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,0.5);flex-wrap:wrap;max-width:420px;}
 #styler .grp{display:flex;align-items:center;gap:0.3rem;}
 #styler .lbl{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-right:0.2rem;}
 #styler button{background:#11100c;color:#fff;border:1px solid var(--line);border-radius:4px;padding:0.35rem 0.5rem;font-size:0.78rem;cursor:pointer;min-width:30px;}
@@ -101,6 +101,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <!-- FLOATING STYLE TOOLBAR -->
 <div id="styler">
+  <div class="grp">
+    <span class="lbl">Font</span>
+    <select id="fontPick" onchange="setFont(this.value)" style="background:#11100c;color:#fff;border:1px solid var(--line);border-radius:4px;padding:0.35rem 0.4rem;font-size:0.76rem;cursor:pointer;max-width:120px;">
+      <option value="">– default –</option>
+      <option value="'Inter',sans-serif" style="font-family:'Inter',sans-serif;">Inter (sans)</option>
+      <option value="'DM Serif Display',serif" style="font-family:'DM Serif Display',serif;">DM Serif</option>
+    </select>
+    <button id="italicBtn" onclick="toggleItalic()" style="font-style:italic;">I</button>
+  </div>
+  <div class="divider"></div>
   <div class="grp">
     <span class="lbl">Size</span>
     <button onclick="chgSize(-1)">−</button>
@@ -337,6 +347,14 @@ function syncStyler(){
   const op = Math.round((parseFloat(cs.opacity)||1)*100);
   document.getElementById('opacityRange').value = op;
   document.getElementById('opacityVal').textContent = op+'%';
+  // font family
+  const fam = (cs.fontFamily||'').toLowerCase();
+  const fontSel = document.getElementById('fontPick');
+  if(fam.indexOf('dm serif')!==-1) fontSel.value = "'DM Serif Display',serif";
+  else if(fam.indexOf('inter')!==-1) fontSel.value = "'Inter',sans-serif";
+  else fontSel.value = '';
+  // italic
+  document.getElementById('italicBtn').classList.toggle('on', cs.fontStyle==='italic');
 }
 function nearestWeight(w){ return [300,400,600,700].reduce((a,b)=>Math.abs(b-w)<Math.abs(a-w)?b:a); }
 function rgbToHex(rgb){ return '#'+rgb.slice(0,3).map(x=>parseInt(x).toString(16).padStart(2,'0')).join(''); }
@@ -365,6 +383,23 @@ function setOpacity(val){
   activeEl.style.opacity = (val/100).toFixed(2);
   document.getElementById('opacityVal').textContent = val+'%';
   markDirty();
+}
+function setFont(family){
+  if(!activeEl) return;
+  if(family){
+    activeEl.style.fontFamily = family;
+    // DM Serif Display only exists in weight 400 → force it so it renders properly
+    if(family.indexOf('DM Serif')!==-1){ activeEl.style.fontWeight = 400; }
+  } else {
+    activeEl.style.fontFamily = '';
+  }
+  syncStyler(); markDirty();
+}
+function toggleItalic(){
+  if(!activeEl) return;
+  const cs = activeEl.ownerDocument.defaultView.getComputedStyle(activeEl);
+  activeEl.style.fontStyle = (cs.fontStyle==='italic') ? 'normal' : 'italic';
+  syncStyler(); markDirty();
 }
 
 // ─── MEDIA REPLACE ───
